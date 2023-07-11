@@ -1,117 +1,60 @@
-/**
- * San Jose State University
- * EE178 Lab #4
- * Author: prof. Eric Crabilla
- *
- * Modified by:
- * 2023  AGH University of Science and Technology
- * MTM UEC2
- * Piotr Kaczmarczyk
- *
- * Description:
- * Top level synthesizable module including the project top and all the FPGA-referred modules.
+/*
+ * Title: UEC2 2022/2023 Project "Duck Hunt"
+ * Authors: Jan Cichon, Arkadiusz Kurnik 
+ * 
+ * Module Description: Top structural module
  */
 
 `timescale 1 ns / 1 ps
 
-module top_vga_basys3 (
-    input  wire clk,
-
-    input  wire btnC,
-    input  wire btnU,
-
+module top_DH_basys3 ( //connections order the same as in constraints file
+    input logic clk,
+    // input logic [15:0] sw,
+    // input logic [15:0] led,
+    // output logic [6:0] seg,
+    // output logic dp,
+    // output logic [3:0] an,
+    input logic btnC,
+    input logic btnU,
+    input logic btnL,
+    input logic btnR,
+    input logic btnD,
     output wire Vsync,
     output wire Hsync,
     output wire [3:0] vgaRed,
     output wire [3:0] vgaGreen,
-    output wire [3:0] vgaBlue,
-
-    inout logic PS2Clk,
-    inout logic PS2Data,
-
-    input logic sw,
-    output logic JA1,
-    output logic JA2,
-    input logic RsRx,
-    output logic RsTx,
-
-    output logic [6:0] seg,
-    output logic [3:0] an,
-    output logic dp
+    output wire [3:0] vgaBlue
 
 );
 
+ // signals
+ logic clk100MHz;
+ logic clk65MHz;
 
-/**
- * Local variables and signals
- */
-
-// wire clk_in, clk_fb, clk_ss, clk_out;
-//wire locked;
-wire pclk;
-wire pclk_mirror;
-wire clk_100MHz;
-
-// (* KEEP = "TRUE" *)
-// (* ASYNC_REG = "TRUE" *)
-// logic [7:0] safe_start = 0;
-// // For details on synthesis attributes used above, see AMD Xilinx UG 901:
-// // https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis/Synthesis-Attributes
+ // modules
+ 
+ clk_wiz_0 u_clk_wiz_0(
+     .clk100MHz,
+     .clk65MHz,
+     // Status and control signals
+    .locked(),
+    // Clock in ports
+    .clk
+    );
 
 
-/**
- * Signals assignments
- */
+ top_DH u_top_DH(
+    .clk(clk65MHz),
+    .clk100MHz(clk100MHz),
+    .rst(btnU),
 
-//assign JA1 = pclk_mirror;
-
-
-/**
- * FPGA submodules placement
- */
-
-clk_wiz_0 u_clk_wiz_0(
-    .clk(clk),
-    .clk100MHz(clk_100MHz),
-    .clk40MHz(pclk),
-    .locked(locked)
-);
-
-
-ODDR pclk_oddr (
-    .Q(pclk_mirror),
-    .C(pclk),
-    .CE(1'b1),
-    .D1(1'b1),
-    .D2(1'b0),
-    .R(1'b0),
-    .S(1'b0)
-);
-
-
-/**
- *  Project functional top module
- */
-
-top_vga u_top_vga (
-    .clk(pclk),
-    .rst(btnC),
     .r(vgaRed),
     .g(vgaGreen),
     .b(vgaBlue),
     .hs(Hsync),
-    .vs(Vsync),
-    .ps2_clk(PS2Clk),
-    .ps2_data(PS2Data),
-    .clk100MHz(clk_100MHz),
-    .loopback_enable(sw),
-    .rx(RsRx),
-    .tx(RsTx),
-    .rx_monitor(JA1),
-    .tx_monitor(JA2),
-    .button_top(btnU),
-    .sseg({seg, dp}),
-    .an(an)
-);
+    .vs(Vsync)
+ );
+
+
 
 endmodule

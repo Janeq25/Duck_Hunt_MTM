@@ -32,16 +32,19 @@ set xdc_files {
 # Specify SystemVerilog design files location   -- EDIT
 set sv_files {
     rtl/top_DH_basys3.sv
+    ../rtl/top_DH.sv
 }
 
 # Specify Verilog design files location         -- EDIT
 set verilog_files {
+    ../rtl/clk/clk_wiz_0_clk_wiz.v
+    ../rtl/clk/clk_wiz_0.v
 }
 
 # Specify VHDL design files location            -- EDIT
-set vhdl_files {
-}
+# set vhdl_files {
+# }
 
 # Specify files for a memory initialization     -- EDIT
-set mem_files {
-}
+# set mem_files {
+# }
