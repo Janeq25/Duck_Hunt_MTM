@@ -1,6 +1,6 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-07-11 14:31:42
+Created: 2023-07-11 20:28:16
 
 ----SYNTHESIS----
 WARNING: [Synth 8-7129] Port clk in module top_DH is either unconnected or has no load
@@ -32,4 +32,5 @@ WARNING: [Synth 8-7129] Port btnR in module top_DH_basys3 is either unconnected 
 WARNING: [Synth 8-7129] Port btnD in module top_DH_basys3 is either unconnected or has no load
 
 ----IMPLEMENTATION----
-CLEAR :)
+WARNING: [Power 33-232] No user defined clocks were found in the design! Power estimation will be inaccurate until this is corrected.
+WARNING: [Timing 38-313] There are no user specified timing constraints. Timing constraints are needed for proper timing analysis.
