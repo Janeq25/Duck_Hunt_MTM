@@ -21,16 +21,37 @@
 
 
  // interfaces
-
+   itf_vga timing_to_draw_bg();
+   itf_vga draw_bg_to_out();
 
  // local signals
-    assign vs = 1'b0;
-    assign hs = 1'b0;
-    assign r = '0;
-    assign g = '0;
-    assign b = '0;
+   logic new_frame;
+
+ // signal assignments
+ assign vs = draw_bg_to_out.vsync;
+ assign hs = draw_bg_to_out.hsync;
+ assign {r,g,b} = draw_bg_to_out.rgb;
 
  // modules
 
+ // ---vga section---
+
+ vga_timing u_vga_timing(
+   .clk,
+   .rst,
+
+   .new_frame,
+   .out(timing_to_draw_bg.out)
+ );
+
+ draw_bg u_draw_bg(
+   .clk,
+   .rst,
+
+   .in(timing_to_draw_bg.in),
+   .out(draw_bg_to_out.out)
+ );
+
+ // -----------------
 
  endmodule
