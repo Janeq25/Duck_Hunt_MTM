@@ -95,9 +95,6 @@ assert property (@(negedge i.vblnk) disable iff (rst) i.vcount == V_B_END-1 || $
 assert property (@(posedge i.vsync) disable iff (rst) i.vcount == V_S_START-1 || $isunknown(i.vcount)) else $error("%m wrong position of vsync start");
 assert property (@(negedge i.vsync) disable iff (rst) i.vcount == V_S_END-1 || $isunknown(i.vcount)) else $error("%m wrong position of vsync end");
 
-
-
-
 /**
  * Main test
  */
