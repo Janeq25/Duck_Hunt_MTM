@@ -39,6 +39,7 @@ set sv_files {
     ../rtl/vga/vga_timing.sv
     ../rtl/vga/draw_bg.sv
     ../rtl/vga/vga_pkg.sv
+    ../rtl/vga/template_rom.sv
     ../rtl/rng/flip_flop.sv
     ../rtl/rng/random_number_generator.sv
 }
@@ -54,5 +55,6 @@ set verilog_files {
 # }
 
 # Specify files for a memory initialization     -- EDIT
-# set mem_files {
-# }
+set mem_files {
+    ../rtl/vga/DH_bg_downscaled.dat
+}

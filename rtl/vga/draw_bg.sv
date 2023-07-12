@@ -41,11 +41,19 @@ import vga_pkg::*;
  */
 
 logic [11:0] rgb_nxt;
+logic [11:0] rom_rgb;
 
 
 /**
  * Internal logic
  */
+
+ template_rom #(.ADDR_WIDTH(17), .DATA_WIDTH(12), .DATA_PATH("DH_bg_downscaled.dat")) u_bg_rom(
+    .clk,
+    .addrA({in.vcount[10:3], in.hcount[10:2]}),
+    .en(1'b1),
+    .dout(rom_rgb)
+);
 
 always_ff @(posedge clk) begin : bg_ff_blk
     if (rst) begin
@@ -67,6 +75,8 @@ always_ff @(posedge clk) begin : bg_ff_blk
     end
 end
 
+
+
 always_comb begin : bg_comb_blk
     if (in.vblnk || in.hblnk) begin             // Blanking region:
         rgb_nxt = 12'h0_0_0;                    // - make it it black.
@@ -79,25 +89,8 @@ always_comb begin : bg_comb_blk
             rgb_nxt = 12'h0_f_0;                // - - make a green line.
         else if (in.hcount == HOR_PIXELS - 1)   // - right edge:
             rgb_nxt = 12'h0_0_f;                // - - make a blue line.
-        //draw authors initials
-        // top of J
-        else if (in.vcount >= 10 && in.vcount <= 60 && in.hcount >= 150 && in.hcount <= 350) rgb_nxt = 12'he_e_e;
-        //middle of J
-        else if (in.vcount >= 10 && in.vcount <= 550 && in.hcount >= 300 && in.hcount <= 350) rgb_nxt = 12'he_e_e;
-        //bottom of J
-        else if (in.vcount >= 500 && in.vcount <= 560 && in.hcount >= 150 && in.hcount <= 350) rgb_nxt = 12'he_e_e;
-        //front notch of J
-        else if (in.vcount >= 400 && in.vcount <= 500 && in.hcount >= 150 && in.hcount <= 200) rgb_nxt = 12'he_e_e;
-        //top of C
-        else if (in.vcount >= 10 && in.vcount <= 60 && in.hcount >= 450 && in.hcount <= 650) rgb_nxt = 12'he_e_e;
-        //middle of C
-        else if (in.vcount >= 10 && in.vcount <= 550 && in.hcount >= 450 && in.hcount <= 500) rgb_nxt = 12'he_e_e;
-        //bottom of C
-        else if (in.vcount >= 500 && in.vcount <= 560 && in.hcount >= 450 && in.hcount <= 650) rgb_nxt = 12'he_e_e;
-
-
         else                                    // The rest of active display pixels:
-            rgb_nxt = 12'h8_8_8;                // - fill with gray.
+            rgb_nxt = rom_rgb;                // - load image
     end
 end
 

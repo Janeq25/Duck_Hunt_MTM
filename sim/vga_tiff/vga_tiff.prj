@@ -16,6 +16,7 @@ sv work ../../rtl/vga/vga_pkg.sv \
         ../../rtl/vga/itf_vga.sv \
         ../../rtl/clk/clk_wiz_0_clk_wiz.v \
         ../../rtl/clk/clk_wiz_0.v \
+        ../../rtl/vga/template_rom.sv \
         tiff_writer.sv \
         vga_tiff_tb.sv
 
