@@ -52,6 +52,15 @@
    .out(draw_bg_to_out.out)
  );
 
+ random_number_generator u_random_number_generator(
+   .clk(clk100MHz),
+   .rst,
+
+   .direction(),
+   .duck_start_pos(),
+   .duck_vertical_speed()
+ );
+
  // -----------------
 
  endmodule

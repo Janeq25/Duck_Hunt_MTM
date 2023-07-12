@@ -1,9 +1,10 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-07-12 13:27:32
+Created: 2023-07-12 16:07:52
 
 ----SYNTHESIS----
 WARNING: [Synth 8-3848] Net out\.rgb in module/entity vga_timing does not have driver. [rtl/vga/vga_timing.sv:18]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [rtl/top_DH.sv:55]
 WARNING: [Synth 8-7129] Port in\.rgb[11] in module draw_bg is either unconnected or has no load
 WARNING: [Synth 8-7129] Port in\.rgb[10] in module draw_bg is either unconnected or has no load
 WARNING: [Synth 8-7129] Port in\.rgb[9] in module draw_bg is either unconnected or has no load
@@ -28,7 +29,6 @@ WARNING: [Synth 8-7129] Port out\.rgb[3] in module vga_timing is either unconnec
 WARNING: [Synth 8-7129] Port out\.rgb[2] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[1] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[0] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port clk100MHz in module top_DH is either unconnected or has no load
 WARNING: [Synth 8-7129] Port btnC in module top_DH_basys3 is either unconnected or has no load
 WARNING: [Synth 8-7129] Port btnL in module top_DH_basys3 is either unconnected or has no load
 WARNING: [Synth 8-7129] Port btnR in module top_DH_basys3 is either unconnected or has no load
