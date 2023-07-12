@@ -1,10 +1,11 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-07-12 16:07:52
+Created: 2023-07-12 19:33:42
 
 ----SYNTHESIS----
 WARNING: [Synth 8-3848] Net out\.rgb in module/entity vga_timing does not have driver. [rtl/vga/vga_timing.sv:18]
-WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [rtl/top_DH.sv:55]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [rtl/top_DH.sv:73]
+WARNING: [Synth 8-7129] Port duck_hit in module draw_duck is either unconnected or has no load
 WARNING: [Synth 8-7129] Port in\.rgb[11] in module draw_bg is either unconnected or has no load
 WARNING: [Synth 8-7129] Port in\.rgb[10] in module draw_bg is either unconnected or has no load
 WARNING: [Synth 8-7129] Port in\.rgb[9] in module draw_bg is either unconnected or has no load

@@ -22,15 +22,16 @@
 
  // interfaces
    itf_vga timing_to_draw_bg();
-   itf_vga draw_bg_to_out();
+   itf_vga draw_bg_to_draw_duck();
+   itf_vga draw_duck_to_out();
 
  // local signals
    logic new_frame;
 
  // signal assignments
- assign vs = draw_bg_to_out.vsync;
- assign hs = draw_bg_to_out.hsync;
- assign {r,g,b} = draw_bg_to_out.rgb;
+ assign vs = draw_duck_to_out.vsync;
+ assign hs = draw_duck_to_out.hsync;
+ assign {r,g,b} = draw_duck_to_out.rgb;
 
  // modules
 
@@ -49,8 +50,25 @@
    .rst,
 
    .in(timing_to_draw_bg.in),
-   .out(draw_bg_to_out.out)
+   .out(draw_bg_to_draw_duck.out)
  );
+
+ draw_duck u_draw_duck(
+  .clk,
+  .rst,
+  .new_frame,
+
+  .duck_hit(1'b0),
+  .duck_show(1'b1),
+  .duck_x(11'd800),
+  .duck_y(11'd600),
+
+  .in(draw_bg_to_draw_duck.in),
+  .out(draw_duck_to_out.out)
+
+ );
+
+  // ---ctrl section-----
 
  random_number_generator u_random_number_generator(
    .clk(clk100MHz),
