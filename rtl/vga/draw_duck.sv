@@ -4,7 +4,7 @@
  * Author: Jan Cichoń
  * 
  * Description:
- * loads and displays duck images
+ * loads displays and animates duck
  */
 
 
@@ -14,10 +14,10 @@
     input logic new_frame,
 
     input logic duck_show,
-    input logic duck_hit,
+    input logic duck_hit, //duck stops moving
 
-    input logic [10:0] duck_x,
-    input logic [10:0] duck_y,
+    input logic [9:0] duck_x,
+    input logic [9:0] duck_y,
 
     itf_vga.in in,
     itf_vga.out out
@@ -79,7 +79,7 @@ always_ff @(posedge clk) begin
     end
 end
 
-always_comb begin
+always_comb begin 
     if(new_frame) begin
         frame_ctr_nxt = frame_ctr + 1;
     end
@@ -91,7 +91,7 @@ end
 always_comb begin
     if (duck_show && in.hcount > duck_x && in.vcount > duck_y && in.hcount < duck_x+DUCK_WIDTH && in.vcount < duck_y+DUCK_HEIGHT) begin
 
-        if(frame_ctr < 8) begin
+        if(frame_ctr < 8 && ~duck_hit) begin
             rgb_nxt = rom_duckA == 12'hf_0_0 ? in.rgb : rom_duckA;
         end
         else begin

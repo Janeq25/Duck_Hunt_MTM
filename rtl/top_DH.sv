@@ -28,6 +28,11 @@
  // local signals
    logic new_frame;
 
+   logic [10:0] duck_x;
+   logic [10:0] duck_y;
+   logic duck_show;
+   logic duck_hit;
+
  // signal assignments
  assign vs = draw_duck_to_out.vsync;
  assign hs = draw_duck_to_out.hsync;
@@ -58,10 +63,10 @@
   .rst,
   .new_frame,
 
-  .duck_hit(1'b0),
-  .duck_show(1'b1),
-  .duck_x(11'd800),
-  .duck_y(11'd600),
+  .duck_hit,
+  .duck_show,
+  .duck_x,
+  .duck_y,
 
   .in(draw_bg_to_draw_duck.in),
   .out(draw_duck_to_out.out)
@@ -77,6 +82,17 @@
    .direction(),
    .duck_start_pos(),
    .duck_vertical_speed()
+ );
+
+ ctl_duck u_ctl_duck(
+  .clk,
+  .rst,
+  .new_frame,
+
+  .duck_show,
+  .duck_hit,
+  .duck_x,
+  .duck_y
  );
 
  // -----------------
