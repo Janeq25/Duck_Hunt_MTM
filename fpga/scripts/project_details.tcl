@@ -54,5 +54,5 @@ set verilog_files {
 
 # Specify files for a memory initialization     -- EDIT
 set mem_files {
-    ../rtl/vga/DH_bg.dat
+    ../rtl/vga/DH_bg_downscaled.dat
 }

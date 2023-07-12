@@ -48,9 +48,9 @@ logic [11:0] rom_rgb;
  * Internal logic
  */
 
- template_rom #(.ADDR_WIDTH(22), .DATA_WIDTH(12), .DATA_PATH("DH_bg.dat")) u_bg_rom(
+ template_rom #(.ADDR_WIDTH(17), .DATA_WIDTH(12), .DATA_PATH("DH_bg_downscaled.dat")) u_bg_rom(
     .clk,
-    .addrA({in.vcount, in.hcount}),
+    .addrA({in.vcount[10:3], in.hcount[10:2]}),
     .en(1'b1),
     .dout(rom_rgb)
 );
