@@ -1,10 +1,6 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-<<<<<<< HEAD
-Created: 2023-07-11 20:28:16
-=======
-Created: 2023-07-11 20:18:01
->>>>>>> vga_timing
+Created: 2023-07-12 13:27:32
 
 ----SYNTHESIS----
 WARNING: [Synth 8-3848] Net out\.rgb in module/entity vga_timing does not have driver. [rtl/vga/vga_timing.sv:18]
@@ -44,5 +40,4 @@ WARNING: [Synth 8-7129] Port btnR in module top_DH_basys3 is either unconnected 
 WARNING: [Synth 8-7129] Port btnD in module top_DH_basys3 is either unconnected or has no load
 
 ----IMPLEMENTATION----
-WARNING: [Power 33-232] No user defined clocks were found in the design! Power estimation will be inaccurate until this is corrected.
-WARNING: [Timing 38-313] There are no user specified timing constraints. Timing constraints are needed for proper timing analysis.
+CLEAR :)

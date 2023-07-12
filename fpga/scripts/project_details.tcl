@@ -39,6 +39,8 @@ set sv_files {
     ../rtl/vga/vga_timing.sv
     ../rtl/vga/draw_bg.sv
     ../rtl/vga/vga_pkg.sv
+    ../rtl/rng/flip_flop.sv
+    ../rtl/rng/random_number_generator.sv
 }
 
 # Specify Verilog design files location         -- EDIT
