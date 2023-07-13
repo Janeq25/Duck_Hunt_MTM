@@ -39,7 +39,8 @@ logic [10:0] duck_y_nxt;
 logic [10:0] expected_duck_x_nxt;
 logic [10:0] expected_duck_y_nxt;
 
-logic [4:0] reflection_number = 0;
+logic [4:0] reflection_number;
+logic [4:0] reflection_number_nxt;
 logic [4:0] duck_vertical_speed;
 logic [4:0] duck_vertical_speed_nxt;
 
@@ -49,9 +50,9 @@ enum logic [2:0]{
     DUCK_RIGHT_UP = 3'b011,
     DUCK_RIGHT_DOWN = 3'b010,
     DUCK_LEFT_UP = 3'b110,
-    DUCK_LEFT_DOWN = 3'b111
-    //DUCK_HIT = 3'b101,
-    //FLY_AWAY = 3'b100
+    DUCK_LEFT_DOWN = 3'b111,
+    FLY_AWAY = 3'b101
+    //DUCK_HIT = 3'b100
 } state, state_nxt; //state_prev, current_state;
 
 always_ff @(posedge clk) begin : state_seq_blk
@@ -85,88 +86,126 @@ always_comb begin : state_comb_blk
             end
         end
         DUCK_RIGHT_UP: begin
-            if(new_frame == 1) begin
+            if(new_frame == 1 && (reflection_number <= reflections)) begin
                 expected_duck_x_nxt = duck_x + duck_h_spd;
                 expected_duck_y_nxt = duck_y - duck_vertical_speed;
                 
-                if(expected_duck_y_nxt > 768) begin
+                if(expected_duck_y_nxt > 768 && expected_duck_x_nxt > 1024) begin
+                    state_nxt = DUCK_LEFT_DOWN;
+                    reflection_number_nxt = reflection_number + 1;
+                end
+                else if(expected_duck_y_nxt > 768) begin
                     state_nxt = DUCK_RIGHT_DOWN;
-                    reflection_number++;
+                    reflection_number_nxt = reflection_number + 1;
                 end
                 else if(expected_duck_x_nxt > 1024) begin
                     state_nxt = DUCK_LEFT_UP;
-                    reflection_number++;
+                    reflection_number_nxt = reflection_number + 1;
                 end
                 else begin
                     state_nxt = DUCK_RIGHT_UP;
                 end
+            end
+            else if(reflection_number > reflections) begin
+                state_nxt = FLY_AWAY;
             end
             else begin 
                 state_nxt = DUCK_RIGHT_UP;
             end
         end
         DUCK_RIGHT_DOWN: begin
-            if(new_frame == 1) begin
+            if(new_frame == 1 && (reflection_number <= reflections)) begin
                 expected_duck_x_nxt = duck_x + duck_h_spd;
                 expected_duck_y_nxt = duck_y + duck_vertical_speed;
 
-                if(expected_duck_y_nxt > 768) begin
+                if(expected_duck_y_nxt > 768 && expected_duck_x_nxt > 1024) begin
+                    state_nxt = DUCK_LEFT_UP;
+                    reflection_number_nxt = reflection_number + 1;
+                end
+                else if(expected_duck_y_nxt > 768) begin
                     state_nxt = DUCK_RIGHT_UP;
-                    reflection_number++;
+                    reflection_number_nxt = reflection_number + 1;
                 end
                 else if(expected_duck_x_nxt > 1024) begin
                     state_nxt = DUCK_LEFT_DOWN;
-                    reflection_number++;
+                    reflection_number_nxt = reflection_number + 1;
                 end
                 else begin
                     state_nxt = DUCK_RIGHT_DOWN;
                 end
+            end
+            else if(reflection_number > reflections) begin
+                state_nxt = FLY_AWAY;
             end
             else begin
                     state_nxt = DUCK_RIGHT_DOWN;
             end
         end
         DUCK_LEFT_UP: begin
-            if(new_frame == 1) begin
+            if(new_frame == 1 && (reflection_number <= reflections)) begin
                 expected_duck_x_nxt = duck_x - duck_h_spd;
                 expected_duck_y_nxt = duck_y - duck_vertical_speed;
 
-                if(expected_duck_y_nxt > 768) begin
+                if(expected_duck_y_nxt > 768 && expected_duck_x_nxt > 1024) begin
+                    state_nxt = DUCK_RIGHT_DOWN;
+                    reflection_number_nxt = reflection_number + 1;
+                end
+                else if(expected_duck_y_nxt > 768) begin
                     state_nxt = DUCK_LEFT_DOWN;
-                    reflection_number++;
+                    reflection_number_nxt = reflection_number + 1;
                 end
                 else if(expected_duck_x_nxt > 1024) begin
                     state_nxt = DUCK_RIGHT_UP;
-                    reflection_number++;
+                    reflection_number_nxt = reflection_number + 1;
                 end
                 else begin
                     state_nxt = DUCK_LEFT_UP;
                 end
+            end
+            else if(reflection_number > reflections) begin
+                state_nxt = FLY_AWAY;
             end
             else begin 
                 state_nxt = DUCK_LEFT_UP;
             end
         end
         DUCK_LEFT_DOWN: begin
-            if(new_frame == 1) begin
+            if(new_frame == 1 && (reflection_number <= reflections)) begin
                 expected_duck_x_nxt = duck_x - duck_h_spd;
                 expected_duck_y_nxt = duck_y + duck_vertical_speed;
 
-                if(expected_duck_y_nxt > 768) begin
+                if(expected_duck_y_nxt > 768 && expected_duck_x_nxt > 1024) begin
+                    state_nxt = DUCK_RIGHT_UP;
+                    reflection_number_nxt = reflection_number + 1;
+                end
+                else if(expected_duck_y_nxt > 768) begin
                     state_nxt = DUCK_LEFT_UP;
-                    reflection_number++;
+                    reflection_number_nxt = reflection_number + 1;
                 end
                 else if(expected_duck_x_nxt > 1024) begin
                     state_nxt = DUCK_RIGHT_DOWN;
-                    reflection_number++;
+                    reflection_number_nxt = reflection_number + 1;
                 end
                 else begin
                     state_nxt = DUCK_LEFT_DOWN;
                 end 
             end
+            else if(reflection_number > reflections) begin
+                state_nxt = FLY_AWAY;
+            end
             else begin
                 state_nxt = DUCK_LEFT_DOWN;
             end
+        end
+        FLY_AWAY: begin 
+            if(new_frame == 1) begin
+                state_nxt = DRAW;
+            end
+            else begin
+                state_nxt = FLY_AWAY;
+            end
+
+            reflection_number_nxt = '0;  
         end
     endcase
 end
@@ -177,12 +216,14 @@ always_ff @(posedge clk) begin : out_reg_blk
         duck_y <= '0;
         frame_ctr <= '0;
         duck_vertical_speed <= '0;
+        reflection_number <= '0;
     end
     else begin : our_reg_run_blk
         duck_x <= duck_x_nxt;
         duck_y <= duck_y_nxt;
         frame_ctr <= frame_ctr_nxt;
         duck_vertical_speed <= duck_vertical_speed_nxt;
+        reflection_number <= reflection_number_nxt;
     end
 end
 
@@ -191,7 +232,10 @@ always_comb begin : out_comb_blk
     case(state_nxt)
         STOP: begin 
             duck_x_nxt = duck_x; 
-            duck_y_nxt = duck_y;  
+            duck_y_nxt = duck_y; 
+
+            duck_show = 1'b0;
+            duck_hit = 1'b0;
         end
         DRAW: begin
             duck_x_nxt = duck_start_x; 
@@ -203,6 +247,9 @@ always_comb begin : out_comb_blk
             else begin
                 duck_vertical_speed_nxt = duck_v_spd;
             end
+
+            duck_show = 1'b0;
+            duck_hit = 1'b0;
         end
         DUCK_RIGHT_UP: begin
             if(new_frame == 1) begin
@@ -211,8 +258,11 @@ always_comb begin : out_comb_blk
             end
             else begin
                 duck_x_nxt = duck_x; 
-                duck_y_nxt = duck_y;  
+                duck_y_nxt = duck_y;
             end
+
+            duck_show = 1'b1;
+            duck_hit = 1'b0;
         end
         DUCK_RIGHT_DOWN: begin
             if(new_frame == 1) begin
@@ -221,18 +271,24 @@ always_comb begin : out_comb_blk
             end
             else begin
                 duck_x_nxt = duck_x; 
-                duck_y_nxt = duck_y;  
+                duck_y_nxt = duck_y;
             end
+
+            duck_show = 1'b1;
+            duck_hit = 1'b0;
         end
         DUCK_LEFT_UP: begin
             if(new_frame == 1) begin
                 duck_x_nxt = duck_x - duck_h_spd;
-                duck_y_nxt = duck_y - duck_vertical_speed;
+                duck_y_nxt = duck_y - duck_vertical_speed; 
             end
             else begin
                 duck_x_nxt = duck_x; 
-                duck_y_nxt = duck_y;  
+                duck_y_nxt = duck_y; 
             end
+
+            duck_show = 1'b1;
+            duck_hit = 1'b0;
         end
         DUCK_LEFT_DOWN: begin
             if(new_frame == 1) begin
@@ -241,12 +297,21 @@ always_comb begin : out_comb_blk
             end
             else begin
                 duck_x_nxt = duck_x; 
-                duck_y_nxt = duck_y;  
+                duck_y_nxt = duck_y; 
             end
+
+            duck_show = 1'b1;
+            duck_hit = 1'b0;
+        end
+        FLY_AWAY: begin 
+            duck_x_nxt = '0; 
+            duck_y_nxt = '0;
+
+            duck_show = 1'b0;
+            duck_hit = 1'b0;
         end
     endcase
 end
-
 
 always_comb begin
     if(new_frame) begin
@@ -257,7 +322,7 @@ always_comb begin
     end
 end
 
-always_comb begin
+//always_comb begin
     //if (frame_ctr > 60) begin //duck hidden
     //    duck_show = 1'b0;
     //    duck_hit = 1'b0;
@@ -267,9 +332,9 @@ always_comb begin
       //  duck_hit = 1'b1;
    // end
    // else begin
-        duck_show = 1'b1; //duck flying
-        duck_hit = 1'b0;
+        //duck_show = 1'b1; //duck flying
+        //duck_hit = 1'b0;
    // end
-end
+//end
 
 endmodule
