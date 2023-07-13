@@ -19,6 +19,8 @@
     output logic [3:0] b
  );
 
+localparam REFLECT = 15;
+localparam H_SPEED = 10;
 
  // interfaces
    itf_vga timing_to_draw_bg();
@@ -26,8 +28,9 @@
    itf_vga draw_duck_to_out();
 
  // local signals
-   logic new_frame;
-
+   logic new_frame, duck_direction;
+   logic [4:0] vertical_speed;
+   logic [9:0] duck_start_x_coordinate;
    logic [10:0] duck_x;
    logic [10:0] duck_y;
    logic duck_show;
@@ -79,15 +82,20 @@
    .clk(clk100MHz),
    .rst,
 
-   .direction(),
-   .duck_start_pos(),
-   .duck_vertical_speed()
+   .direction(duck_direction),
+   .duck_start_pos(duck_start_x_coordinate),
+   .duck_vertical_speed(vertical_speed)
  );
 
  ctl_duck u_ctl_duck(
   .clk,
   .rst,
   .new_frame,
+  .duck_direction(duck_direction),
+  .reflections(REFLECT),
+  .duck_v_spd(vertical_speed),
+  .duck_h_spd(H_SPEED),
+  .duck_start_x(duck_start_x_coordinate),
 
   .duck_show,
   .duck_hit,
