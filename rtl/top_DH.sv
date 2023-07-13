@@ -16,7 +16,12 @@
     output logic hs,
     output logic [3:0] r,
     output logic [3:0] g,
-    output logic [3:0] b
+    output logic [3:0] b,
+
+    output logic [15:0] led,
+
+    input logic gun_trigger,
+    input logic gun_photodetector
  );
 
 
@@ -37,6 +42,10 @@
  assign vs = draw_duck_to_out.vsync;
  assign hs = draw_duck_to_out.hsync;
  assign {r,g,b} = draw_duck_to_out.rgb;
+
+ assign led[15:2] = '0;
+ assign led[0] = gun_trigger;
+ assign led[1] = gun_photodetector;
 
  // modules
 
