@@ -19,7 +19,7 @@
     output logic [3:0] b
  );
 
-localparam REFLECT = 31;
+localparam REFLECT = 30;
 localparam H_SPEED = 10;
 
  // interfaces

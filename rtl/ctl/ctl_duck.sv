@@ -26,10 +26,6 @@ module ctl_duck (
     output logic duck_hit
  );
 
-//parameters
-//localparam VER_SPD = 3;
-//localparam HOR_SPD = 7;
-
 //internal signals
 logic [5:0] frame_ctr;
 logic [5:0] frame_ctr_nxt;
