@@ -1,10 +1,10 @@
 /**
  * Copyright (C) 2023  AGH University of Science and Technology
  * MTM UEC2
- * Author: Jan Cichoń
+ * Author: Jan Cichoń, Arkadiusz Kurnik
  * 
  * Description:
- * loads and displays duck images
+ *calculates dusk position x, y
  */
 
 
