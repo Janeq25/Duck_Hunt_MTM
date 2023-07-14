@@ -8,12 +8,12 @@
  */
 
 
-module ctl_duck (
+ module ctl_duck (
     input logic clk,
     input logic rst,
     input logic new_frame,
     input logic duck_direction,
-    input logic [4:0] reflections,
+    //input logic [4:0] reflections,
     input logic [4:0] duck_v_spd,
     input logic [4:0] duck_h_spd,
     input logic [9:0] duck_start_x,
@@ -61,15 +61,15 @@ end
 always_comb begin : state_comb_blk
     case(state)
         STOP: begin
-            if(reflections == 0 && new_frame == 0) begin
-                state_nxt = STOP;
-            end
-            else if(reflections > 0) begin
+            //if(reflections == 0 && new_frame == 0) begin
+            //    state_nxt = STOP;
+           // end
+           // else if(reflections > 0) begin
                 state_nxt = DRAW;
-            end
-            else begin
-                state_nxt = state;
-            end
+           // end
+           // else begin
+            //    state_nxt = state;
+           // end
         end
         DRAW: begin
             if(duck_direction == 1) begin
@@ -106,10 +106,10 @@ always_comb begin : state_comb_blk
                 expected_duck_x_nxt = duck_x + duck_h_spd;
                 expected_duck_y_nxt = duck_y + duck_vertical_speed;
 
-                if(expected_duck_y_nxt > 768 && expected_duck_x_nxt > 1024) begin
+                if(expected_duck_y_nxt > 600 && expected_duck_x_nxt > 1024) begin
                     state_nxt = DUCK_LEFT_UP;
                 end
-                else if(expected_duck_y_nxt > 768) begin
+                else if(expected_duck_y_nxt > 600) begin
                     state_nxt = DUCK_RIGHT_UP;
                 end
                 else if(expected_duck_x_nxt > 1024) begin
@@ -150,10 +150,10 @@ always_comb begin : state_comb_blk
                 expected_duck_x_nxt = duck_x - duck_h_spd;
                 expected_duck_y_nxt = duck_y + duck_vertical_speed;
 
-                if(expected_duck_y_nxt > 768 && expected_duck_x_nxt > 1024) begin
+                if(expected_duck_y_nxt > 600 && expected_duck_x_nxt > 1024) begin
                     state_nxt = DUCK_RIGHT_UP;
                 end
-                else if(expected_duck_y_nxt > 768) begin
+                else if(expected_duck_y_nxt > 600) begin
                     state_nxt = DUCK_LEFT_UP;                 
                 end
                 else if(expected_duck_x_nxt > 1024) begin

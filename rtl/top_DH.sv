@@ -19,7 +19,6 @@
     output logic [3:0] b
  );
 
-localparam REFLECT = 30;
 localparam H_SPEED = 10;
 
  // interfaces
@@ -92,7 +91,7 @@ localparam H_SPEED = 10;
   .rst,
   .new_frame,
   .duck_direction(duck_direction),
-  .reflections(REFLECT),
+  //.reflections(15),
   .duck_v_spd(vertical_speed),
   .duck_h_spd(H_SPEED),
   .duck_start_x(duck_start_x_coordinate),
