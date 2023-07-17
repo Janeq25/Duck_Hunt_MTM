@@ -19,8 +19,8 @@
     input logic [9:0] duck_start_x,
 
 
-    output logic [10:0] duck_x,
-    output logic [10:0] duck_y,
+    output logic [9:0] duck_x,
+    output logic [9:0] duck_y,
 
     output logic duck_show,
     output logic duck_hit

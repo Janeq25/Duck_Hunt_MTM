@@ -10,12 +10,11 @@
 module top_DH_basys3 ( //connections order the same as in constraints file
     input logic clk,
     // input logic [15:0] sw,
-    // input logic [15:0] led,
-    //input logic btnC,
-    //input logic btnL,
-    //input logic btnR,
-    //input logic btnD,
-
+    output logic [15:0] led,
+    output logic [6:0] seg,
+    output logic dp,
+    output logic [3:0] an,
+    input logic btnC,
     input logic btnU,
     
     output wire Vsync,
@@ -23,10 +22,10 @@ module top_DH_basys3 ( //connections order the same as in constraints file
     output wire [3:0] vgaRed,
     output wire [3:0] vgaGreen,
     output wire [3:0] vgaBlue,
-
-    output logic [3:0] an,
-    output logic [6:0] seg,
-    output logic dp
+    inout logic PS2Clk,
+    inout logic PS2Data,
+    input wire JA2, //trigger
+    input wire JA3 //photodetector
 
 );
 
@@ -59,7 +58,14 @@ module top_DH_basys3 ( //connections order the same as in constraints file
 
     .an,
     .dp,
-    .seg
+    .seg,
+    .led,
+
+    .ps2_clk(PS2Clk),
+    .ps2_data(PS2Data),
+
+    .gun_trigger(JA2),
+    .gun_photodetector(JA3)
  );
 
 
