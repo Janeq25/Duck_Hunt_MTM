@@ -16,7 +16,10 @@
     output logic hs,
     output logic [3:0] r,
     output logic [3:0] g,
-    output logic [3:0] b
+    output logic [3:0] b,
+    output logic [3:0] an,
+    output logic [6:0] seg,
+    output logic dp
  );
 
 localparam H_SPEED = 10;
@@ -103,5 +106,17 @@ localparam H_SPEED = 10;
  );
 
  // -----------------
+
+ disp_hex_mux u_disp_hex_mux (
+    .clk,
+    .reset(rst),
+    .hex0(4'b0100), //ammo x1
+    .hex1(4'b0011), //ammo x10
+    .hex2(4'b0010), //score x1
+    .hex3(4'b0001), //score x10
+    .dp_in(4'b1011), //dot
+    .an,
+    .sseg({dp, seg})
+);
 
  endmodule

@@ -50,6 +50,7 @@ set sv_files {
 set verilog_files {
     ../rtl/clk/clk_wiz_0_clk_wiz.v
     ../rtl/clk/clk_wiz_0.v
+    ../rtl/score_display/disp_hex_mux.v
 }
 
 # Specify VHDL design files location            -- EDIT

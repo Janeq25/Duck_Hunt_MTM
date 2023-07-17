@@ -11,19 +11,22 @@ module top_DH_basys3 ( //connections order the same as in constraints file
     input logic clk,
     // input logic [15:0] sw,
     // input logic [15:0] led,
-    // output logic [6:0] seg,
-    // output logic dp,
-    // output logic [3:0] an,
-    input logic btnC,
+    //input logic btnC,
+    //input logic btnL,
+    //input logic btnR,
+    //input logic btnD,
+
     input logic btnU,
-    input logic btnL,
-    input logic btnR,
-    input logic btnD,
+    
     output wire Vsync,
     output wire Hsync,
     output wire [3:0] vgaRed,
     output wire [3:0] vgaGreen,
-    output wire [3:0] vgaBlue
+    output wire [3:0] vgaBlue,
+
+    output logic [3:0] an,
+    output logic [6:0] seg,
+    output logic dp
 
 );
 
@@ -52,7 +55,11 @@ module top_DH_basys3 ( //connections order the same as in constraints file
     .g(vgaGreen),
     .b(vgaBlue),
     .hs(Hsync),
-    .vs(Vsync)
+    .vs(Vsync),
+
+    .an,
+    .dp,
+    .seg
  );
 
 
