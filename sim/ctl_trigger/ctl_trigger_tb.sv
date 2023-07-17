@@ -81,7 +81,7 @@ ctl_trigger u_dut(
     .rst,
 
     .gun_photodetector(dut_in[0]),
-    .gun_trigger(dut_in[1]),
+    .gun_trigger(~dut_in[1]),
 
     .mouse_on_target(dut_in[2]),
     .mouse_left(dut_in[3]),
