@@ -80,92 +80,72 @@ always_comb begin : state_comb_blk
             end
         end
         DUCK_RIGHT_UP: begin
-            if(new_frame == 1) begin
-                expected_duck_x_nxt = duck_x + duck_h_spd;
-                expected_duck_y_nxt = duck_y - duck_vertical_speed;
-                
-                if(expected_duck_y_nxt > 768 && expected_duck_x_nxt > 1024) begin
-                    state_nxt = DUCK_LEFT_DOWN;
-                end
-                else if(expected_duck_y_nxt > 768) begin
-                    state_nxt = DUCK_RIGHT_DOWN;
-                end
-                else if(expected_duck_x_nxt > 1024) begin
-                    state_nxt = DUCK_LEFT_UP;
-                end
-                else begin
-                    state_nxt = DUCK_RIGHT_UP;
-                end
+            expected_duck_x_nxt = duck_x + duck_h_spd;
+            expected_duck_y_nxt = duck_y - duck_vertical_speed;
+            
+            if(expected_duck_y_nxt > 768 && expected_duck_x_nxt > 1024) begin
+                state_nxt = DUCK_LEFT_DOWN;
             end
-            else begin 
+            else if(expected_duck_y_nxt > 768) begin
+                state_nxt = DUCK_RIGHT_DOWN;
+            end
+            else if(expected_duck_x_nxt > 1024) begin
+                state_nxt = DUCK_LEFT_UP;
+            end
+            else begin
                 state_nxt = DUCK_RIGHT_UP;
             end
         end
         DUCK_RIGHT_DOWN: begin
-            if(new_frame == 1) begin
-                expected_duck_x_nxt = duck_x + duck_h_spd;
-                expected_duck_y_nxt = duck_y + duck_vertical_speed;
+            expected_duck_x_nxt = duck_x + duck_h_spd;
+            expected_duck_y_nxt = duck_y + duck_vertical_speed;
 
-                if(expected_duck_y_nxt > 600 && expected_duck_x_nxt > 1024) begin
-                    state_nxt = DUCK_LEFT_UP;
-                end
-                else if(expected_duck_y_nxt > 600) begin
-                    state_nxt = DUCK_RIGHT_UP;
-                end
-                else if(expected_duck_x_nxt > 1024) begin
-                    state_nxt = DUCK_LEFT_DOWN;
-                end
-                else begin
-                    state_nxt = DUCK_RIGHT_DOWN;
-                end
+            if(expected_duck_y_nxt > 600 && expected_duck_x_nxt > 1024) begin
+                state_nxt = DUCK_LEFT_UP;
+            end
+            else if(expected_duck_y_nxt > 600) begin
+                state_nxt = DUCK_RIGHT_UP;
+            end
+            else if(expected_duck_x_nxt > 1024) begin
+                state_nxt = DUCK_LEFT_DOWN;
             end
             else begin
-                    state_nxt = DUCK_RIGHT_DOWN;
+                state_nxt = DUCK_RIGHT_DOWN;
             end
         end
         DUCK_LEFT_UP: begin
-            if(new_frame == 1) begin
-                expected_duck_x_nxt = duck_x - duck_h_spd;
-                expected_duck_y_nxt = duck_y - duck_vertical_speed;
+            expected_duck_x_nxt = duck_x - duck_h_spd;
+            expected_duck_y_nxt = duck_y - duck_vertical_speed;
 
-                if(expected_duck_y_nxt > 768 && expected_duck_x_nxt > 1024) begin
-                    state_nxt = DUCK_RIGHT_DOWN;
-                end
-                else if(expected_duck_y_nxt > 768) begin
-                    state_nxt = DUCK_LEFT_DOWN;
-                end
-                else if(expected_duck_x_nxt > 1024) begin
-                    state_nxt = DUCK_RIGHT_UP;
-                end
-                else begin
-                    state_nxt = DUCK_LEFT_UP;
-                end
+            if(expected_duck_y_nxt > 768 && expected_duck_x_nxt > 1024) begin
+                state_nxt = DUCK_RIGHT_DOWN;
             end
-            else begin 
+            else if(expected_duck_y_nxt > 768) begin
+                state_nxt = DUCK_LEFT_DOWN;
+            end
+            else if(expected_duck_x_nxt > 1024) begin
+                state_nxt = DUCK_RIGHT_UP;
+            end
+            else begin
                 state_nxt = DUCK_LEFT_UP;
             end
         end
         DUCK_LEFT_DOWN: begin
-            if(new_frame == 1) begin
-                expected_duck_x_nxt = duck_x - duck_h_spd;
-                expected_duck_y_nxt = duck_y + duck_vertical_speed;
+            expected_duck_x_nxt = duck_x - duck_h_spd;
+            expected_duck_y_nxt = duck_y + duck_vertical_speed;
 
-                if(expected_duck_y_nxt > 600 && expected_duck_x_nxt > 1024) begin
-                    state_nxt = DUCK_RIGHT_UP;
-                end
-                else if(expected_duck_y_nxt > 600) begin
-                    state_nxt = DUCK_LEFT_UP;                 
-                end
-                else if(expected_duck_x_nxt > 1024) begin
-                    state_nxt = DUCK_RIGHT_DOWN;
-                end
-                else begin
-                    state_nxt = DUCK_LEFT_DOWN;
-                end 
+            if(expected_duck_y_nxt > 600 && expected_duck_x_nxt > 1024) begin
+                state_nxt = DUCK_RIGHT_UP;
+            end
+            else if(expected_duck_y_nxt > 600) begin
+                state_nxt = DUCK_LEFT_UP;                 
+            end
+            else if(expected_duck_x_nxt > 1024) begin
+                state_nxt = DUCK_RIGHT_DOWN;
             end
             else begin
                 state_nxt = DUCK_LEFT_DOWN;
-            end
+            end 
         end
         FLY_AWAY: begin 
             //if(new_frame == 1) begin
