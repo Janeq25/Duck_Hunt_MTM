@@ -1,59 +1,9 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-07-13 21:03:46
+Created: 2023-07-17 16:53:22
 
 ----SYNTHESIS----
-WARNING: [Synth 8-3848] Net out\.rgb in module/entity vga_timing does not have driver. [rtl/vga/vga_timing.sv:18]
-WARNING: [Synth 8-689] width (11) of port connection 'duck_x' does not match port width (10) of module 'draw_duck' [rtl/top_DH.sv:77]
-WARNING: [Synth 8-689] width (11) of port connection 'duck_y' does not match port width (10) of module 'draw_duck' [rtl/top_DH.sv:78]
-WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [rtl/top_DH.sv:87]
-WARNING: [Synth 8-7129] Port in\.rgb[11] in module draw_bg is either unconnected or has no load
-WARNING: [Synth 8-7129] Port in\.rgb[10] in module draw_bg is either unconnected or has no load
-WARNING: [Synth 8-7129] Port in\.rgb[9] in module draw_bg is either unconnected or has no load
-WARNING: [Synth 8-7129] Port in\.rgb[8] in module draw_bg is either unconnected or has no load
-WARNING: [Synth 8-7129] Port in\.rgb[7] in module draw_bg is either unconnected or has no load
-WARNING: [Synth 8-7129] Port in\.rgb[6] in module draw_bg is either unconnected or has no load
-WARNING: [Synth 8-7129] Port in\.rgb[5] in module draw_bg is either unconnected or has no load
-WARNING: [Synth 8-7129] Port in\.rgb[4] in module draw_bg is either unconnected or has no load
-WARNING: [Synth 8-7129] Port in\.rgb[3] in module draw_bg is either unconnected or has no load
-WARNING: [Synth 8-7129] Port in\.rgb[2] in module draw_bg is either unconnected or has no load
-WARNING: [Synth 8-7129] Port in\.rgb[1] in module draw_bg is either unconnected or has no load
-WARNING: [Synth 8-7129] Port in\.rgb[0] in module draw_bg is either unconnected or has no load
-WARNING: [Synth 8-7129] Port out\.rgb[11] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port out\.rgb[10] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port out\.rgb[9] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port out\.rgb[8] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port out\.rgb[7] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port out\.rgb[6] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port out\.rgb[5] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port out\.rgb[4] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port out\.rgb[3] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port out\.rgb[2] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port out\.rgb[1] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port out\.rgb[0] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port btnC in module top_DH_basys3 is either unconnected or has no load
-WARNING: [Synth 8-7129] Port btnL in module top_DH_basys3 is either unconnected or has no load
-WARNING: [Synth 8-7129] Port btnR in module top_DH_basys3 is either unconnected or has no load
-WARNING: [Synth 8-7129] Port btnD in module top_DH_basys3 is either unconnected or has no load
-WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[15] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[14] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[13] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[12] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[11] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[10] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[9] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[8] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[7] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[6] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[5] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[4] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[3] driven by constant 0
-WARNING: [Synth 8-3917] design top_DH_basys3 has port led[2] driven by constant 0
-WARNING: [Synth 8-7129] Port btnC in module top_DH_basys3 is either unconnected or has no load
-WARNING: [Synth 8-7129] Port btnL in module top_DH_basys3 is either unconnected or has no load
-WARNING: [Synth 8-7129] Port btnR in module top_DH_basys3 is either unconnected or has no load
-WARNING: [Synth 8-7129] Port btnD in module top_DH_basys3 is either unconnected or has no load
+No synthesis log file found!
 
 ----IMPLEMENTATION----
-CLEAR :)
+No implementation log file found!
