@@ -1,6 +1,6 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-07-17 19:48:45
+Created: 2023-07-17 20:07:10
 
 ----SYNTHESIS----
 WARNING: [Synth 8-6014] Unused sequential element set_x.inc_reg was removed.  [rtl/input/MouseCtl.vhd:450]
@@ -8,7 +8,7 @@ WARNING: [Synth 8-6014] Unused sequential element set_x.x_inter_reg was removed.
 WARNING: [Synth 8-6014] Unused sequential element set_y.inc_reg was removed.  [rtl/input/MouseCtl.vhd:514]
 WARNING: [Synth 8-6014] Unused sequential element set_y.y_inter_reg was removed.  [rtl/input/MouseCtl.vhd:520]
 WARNING: [Synth 8-3848] Net out\.rgb in module/entity vga_timing does not have driver. [rtl/vga/vga_timing.sv:18]
-WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [rtl/top_DH.sv:178]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [rtl/top_DH.sv:164]
 WARNING: [Synth 8-7129] Port in\.rgb[11] in module draw_bg is either unconnected or has no load
 WARNING: [Synth 8-7129] Port in\.rgb[10] in module draw_bg is either unconnected or has no load
 WARNING: [Synth 8-7129] Port in\.rgb[9] in module draw_bg is either unconnected or has no load
@@ -39,11 +39,7 @@ WARNING: [Synth 8-7129] Port btnL in module top_DH_basys3 is either unconnected 
 WARNING: [Synth 8-7129] Port btnR in module top_DH_basys3 is either unconnected or has no load
 WARNING: [Synth 8-7129] Port btnD in module top_DH_basys3 is either unconnected or has no load
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
-WARNING: [Synth 8-3936] Found unconnected internal register 'u_top_DH/u_mouse_sync/xpos_out_reg' and it is trimmed from '12' to '10' bits. [rtl/input/mouse_sync.sv:37]
-WARNING: [Synth 8-3936] Found unconnected internal register 'u_top_DH/u_mouse_sync/xpos_delay_reg' and it is trimmed from '12' to '10' bits. [rtl/input/mouse_sync.sv:31]
 WARNING: [Synth 8-3936] Found unconnected internal register 'u_top_DH/u_MouseCtl/xpos_reg' and it is trimmed from '12' to '10' bits. [rtl/input/MouseCtl.vhd:426]
-WARNING: [Synth 8-3936] Found unconnected internal register 'u_top_DH/u_mouse_sync/ypos_out_reg' and it is trimmed from '12' to '10' bits. [rtl/input/mouse_sync.sv:38]
-WARNING: [Synth 8-3936] Found unconnected internal register 'u_top_DH/u_mouse_sync/ypos_delay_reg' and it is trimmed from '12' to '10' bits. [rtl/input/mouse_sync.sv:32]
 WARNING: [Synth 8-3936] Found unconnected internal register 'u_top_DH/u_MouseCtl/ypos_reg' and it is trimmed from '12' to '10' bits. [rtl/input/MouseCtl.vhd:429]
 WARNING: [Synth 8-3917] design top_DH_basys3 has port led[15] driven by constant 0
 WARNING: [Synth 8-3917] design top_DH_basys3 has port led[14] driven by constant 0
@@ -61,5 +57,4 @@ WARNING: [Synth 8-7129] Port btnR in module top_DH_basys3 is either unconnected 
 WARNING: [Synth 8-7129] Port btnD in module top_DH_basys3 is either unconnected or has no load
 
 ----IMPLEMENTATION----
-WARNING: [Route 35-328] Router estimated timing not met.
-CRITICAL WARNING: [Timing 38-282] The design failed to meet the timing requirements. Please see the timing summary report for details on the timing violations.
+CLEAR :)

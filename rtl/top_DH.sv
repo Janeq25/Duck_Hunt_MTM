@@ -43,13 +43,9 @@
    logic duck_hit;
 
  //mouse signals
-   logic [11:0] xpos_in;
-   logic [11:0] ypos_in;
-   logic [11:0] xpos_out;
-   logic [11:0] ypos_out;
-   logic mouse_left_in;
-   logic mouse_left_out;
-
+   logic [11:0] xpos;
+   logic [11:0] ypos;
+   logic mouse_left;
    logic mouse_on_target;
 
   //gun signals
@@ -70,14 +66,14 @@
  // --- input section ---
 
  MouseCtl u_MouseCtl (
-    .clk(clk100MHz),
+    .clk(clk),
     .rst(rst),
     .ps2_clk(ps2_clk),
     .ps2_data(ps2_data),
 
-    .xpos(xpos_in),
-    .ypos(ypos_in),
-    .left(mouse_left_in),
+    .xpos(xpos),
+    .ypos(ypos),
+    .left(mouse_left),
     
     .zpos(),
     .middle(),
@@ -90,24 +86,14 @@
     .setmax_y('0)
     );
 
-  mouse_sync u_mouse_sync (
-    .clk(clk),
-    .xpos_in(xpos_in),
-    .xpos_out(xpos_out),
-    .ypos_in(ypos_in),
-    .ypos_out(ypos_out),
-    .mouse_left_in(mouse_left_in),
-    .mouse_left_out(mouse_left_out)
-);
-
   mouse_hit_detector #(.TARGET_HEIGHT(48), .TARGET_WIDTH(64)) u_mouse_hit_detector(
     .clk,
     .rst,
 
     .mouse_on_target,
 
-    .mouse_x(xpos_out[9:0]),
-    .mouse_y(ypos_out[9:0]),
+    .mouse_x(xpos[9:0]),
+    .mouse_y(ypos[9:0]),
 
     .target_x(duck_x),
     .target_y(duck_y)
@@ -131,7 +117,7 @@
     .gun_photodetector,
     .gun_trigger,
 
-    .mouse_left(mouse_left_out),
+    .mouse_left(mouse_left),
     .mouse_on_target,
 
     .hit(led[4]),
