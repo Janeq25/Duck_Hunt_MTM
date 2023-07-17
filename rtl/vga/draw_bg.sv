@@ -15,21 +15,8 @@ module draw_bg (
     input  logic clk,
     input  logic rst,
 
-    // input  logic [10:0] in.vcount,
-    // input  logic        in.vsync,
-    // input  logic        in.vblnk,
-    // input  logic [10:0] in.hcount,
-    // input  logic        in.hsync,
-    // input  logic        in.hblnk,
     itf_vga.in in,
 
-    // output logic [10:0] vcount_out,
-    // output logic        vsync_out,
-    // output logic        vblnk_out,
-    // output logic [10:0] hcount_out,
-    // output logic        hsync_out,
-    // output logic        hblnk_out,
-    // output logic [11:0] rgb_out
     itf_vga.out out
 );
 
