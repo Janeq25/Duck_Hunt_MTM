@@ -44,7 +44,10 @@ set sv_files {
     ../rtl/rng/flip_flop.sv
     ../rtl/rng/random_number_generator.sv
     ../rtl/ctl/ctl_duck.sv
-    ../rtl/input/muse_sync.sv
+    ../rtl/input/mouse_sync.sv
+    ../rtl/input/ctl_trigger.sv
+    ../rtl/input/gun_conn_detector.sv
+    ../rtl/input/mouse_hit_detector.sv
 }
 
 # Specify Verilog design files location         -- EDIT

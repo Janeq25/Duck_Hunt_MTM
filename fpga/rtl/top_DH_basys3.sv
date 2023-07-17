@@ -24,8 +24,8 @@ module top_DH_basys3 ( //connections order the same as in constraints file
     output wire [3:0] vgaRed,
     output wire [3:0] vgaGreen,
     output wire [3:0] vgaBlue,
-    input logic PS2Clk,
-    input logic PS2Data,
+    inout logic PS2Clk,
+    inout logic PS2Data,
     input wire JA2, //trigger
     input wire JA3 //photodetector
 

@@ -20,8 +20,8 @@
 
     output logic [15:0] led,
 
-    input logic ps2_clk,
-    input logic ps2_data,
+    inout logic ps2_clk,
+    inout logic ps2_data,
 
     input logic gun_trigger,
     input logic gun_photodetector
@@ -43,21 +43,27 @@
    logic duck_hit;
 
  //mouse signals
-   logic [9:0] xpos_in;
-   logic [9:0] ypos_in;
-   logic [9:0] xpos_out;
-   logic [9:0] ypos_out;
+   logic [11:0] xpos_in;
+   logic [11:0] ypos_in;
+   logic [11:0] xpos_out;
+   logic [11:0] ypos_out;
    logic mouse_left_in;
    logic mouse_left_out;
+
+   logic mouse_on_target;
+
+  //gun signals
+   logic gun_is_connected;
 
  // signal assignments
  assign vs = draw_duck_to_out.vsync;
  assign hs = draw_duck_to_out.hsync;
  assign {r,g,b} = draw_duck_to_out.rgb;
 
- assign led[15:2] = '0;
+ assign led[15:6] = '0;
  assign led[0] = gun_trigger;
  assign led[1] = gun_photodetector;
+ assign led[5] = gun_is_connected;
 
  // modules
 
@@ -77,7 +83,7 @@
     .middle(),
     .right(),
     .new_event(),
-    .value('0),
+    .value(),
     .setx('0),
     .sety('0),
     .setmax_x('0),
@@ -93,6 +99,45 @@
     .mouse_left_in(mouse_left_in),
     .mouse_left_out(mouse_left_out)
 );
+
+  mouse_hit_detector #(.TARGET_HEIGHT(48), .TARGET_WIDTH(64)) u_mouse_hit_detector(
+    .clk,
+    .rst,
+
+    .mouse_on_target,
+
+    .mouse_x(xpos_out[9:0]),
+    .mouse_y(ypos_out[9:0]),
+
+    .target_x(duck_x),
+    .target_y(duck_y)
+  );
+
+  gun_conn_detector u_gun_conn_detector(
+    .clk,
+    .rst,
+
+    .gun_is_connected,
+    
+    .gun_photodetector,
+    .gun_trigger
+  );
+
+  ctl_trigger u_ctl_trigger(
+    .clk,
+    .rst,
+
+    .gun_is_connected,
+    .gun_photodetector,
+    .gun_trigger,
+
+    .mouse_left(mouse_left_out),
+    .mouse_on_target,
+
+    .hit(led[4]),
+    .miss(led[3]),
+    .shot_fired(led[2])
+  );
 
 
  // ---vga section---
