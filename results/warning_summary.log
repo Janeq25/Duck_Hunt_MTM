@@ -1,6 +1,6 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-07-18 16:21:46
+Created: 2023-07-18 16:33:16
 
 ----SYNTHESIS----
 WARNING: [Synth 8-6014] Unused sequential element set_x.inc_reg was removed.  [rtl/input/MouseCtl.vhd:450]
@@ -39,6 +39,7 @@ WARNING: [Synth 8-7129] Port out\.rgb[3] in module vga_timing is either unconnec
 WARNING: [Synth 8-7129] Port out\.rgb[2] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[1] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[0] in module vga_timing is either unconnected or has no load
+WARNING: [Synth 8-7129] Port test_btn in module top_DH is either unconnected or has no load
 WARNING: [Synth 8-327] inferring latch for variable 'duck_x_nxt_reg' [rtl/ctl/ctl_duck.sv:180]
 WARNING: [Synth 8-327] inferring latch for variable 'FSM_sequential_state_nxt_reg' [rtl/ctl/ctl_duck.sv:68]
 WARNING: [Synth 8-327] inferring latch for variable 'FSM_onehot_state_nxt_reg' [rtl/ctl/ctl_duck.sv:68]
@@ -72,6 +73,7 @@ WARNING: [Synth 8-7129] Port out\.rgb[3] in module vga_timing is either unconnec
 WARNING: [Synth 8-7129] Port out\.rgb[2] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[1] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[0] in module vga_timing is either unconnected or has no load
+WARNING: [Synth 8-7129] Port test_btn in module top_DH is either unconnected or has no load
 WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_duck/duck_x_nxt_reg[10]) is unused and will be removed from module top_DH_basys3.
 WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_duck/duck_y_nxt_reg[10]) is unused and will be removed from module top_DH_basys3.
 WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_duck/duck_hit_reg) is unused and will be removed from module top_DH_basys3.
