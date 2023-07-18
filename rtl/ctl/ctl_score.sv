@@ -38,7 +38,7 @@ always_ff @(posedge clk) begin : edge_detection
     end
 end
 
-always_ff @(posedge clk) begin
+always_ff @(posedge clk) begin : score_counter
     if (rst || reset_score) begin
         score_ctr <= '0;
     end
@@ -47,7 +47,7 @@ always_ff @(posedge clk) begin
     end
 end
 
-always_ff @(posedge clk) begin
+always_ff @(posedge clk) begin : output_register
     if(rst || reset_score) begin
         hex2 <= '0;
         hex3 <= '0;
@@ -63,7 +63,7 @@ end
 //combinational logic
 
 always_comb begin
-    if (~hit_last && hit) begin
+    if (~hit_last && hit) begin : score_ctr_comb
         score_ctr_nxt = score_ctr + 1;
     end
     else begin
@@ -71,7 +71,7 @@ always_comb begin
     end
 end
 
-always_comb begin
+always_comb begin : conversion_to_dec
     hex2_nxt = score_ctr % 10;
     hex3_nxt = score_ctr / 10;
 end
