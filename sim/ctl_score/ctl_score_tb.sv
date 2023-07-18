@@ -17,7 +17,7 @@ module ctl_score_tb;
  *  Local parameters
  */
 
-localparam CLK_PERIOD = 10;     // 100 MHz
+ localparam CLK_PERIOD = 15;     // 65 MHz
 
 /**
  * Local variables and signals
@@ -37,6 +37,10 @@ initial begin
         clk = ~clk;
         hit = ~hit;
     end 
+end
+
+initial begin
+    forever #(3*CLK_PERIOD/2) hit = ~hit;
 end
 
 
@@ -68,9 +72,12 @@ initial begin
 
     $display("Simulation START");
     $monitor("%0t: hex3=%d hex2=%d", $realtime, digit_3, digit_2);
+
+    #450
     
-    #225 rst = 1'b1; //time offset 60ns
-    #225 rst = 1'b0;
+    $display("reset_score test");
+    # 30 reset_score = 1'b1; //time offset 60ns
+    # 30 reset_score = 1'b0;
 
     #1010
     $display("Simulation is over");
