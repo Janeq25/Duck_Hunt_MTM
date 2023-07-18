@@ -19,16 +19,19 @@
     output logic [3:0] hex3
  );
 
+logic hit_last;
 logic [3:0] hex2_nxt, hex3_nxt, hex2_predicted, hex3_predicted;
 
 always_ff @(posedge clk) begin
     if(rst) begin
         hex2 <= 4'b0;
         hex3 <= 4'b0;
+        hit_last <= 1'b0;
     end
     else begin
         hex2 <= hex2_nxt;
         hex3 <= hex3_nxt;
+        hit_last <= hit;
     end
 end
 
@@ -38,7 +41,7 @@ always_comb begin
         hex2_nxt = 4'b0;
         hex3_nxt = 4'b0;
     end
-    else if(hit) begin
+    else if(~hit_last && hit) begin
         hex2_predicted = hex2 + 1;
         hex3_predicted = hex3 + 1;
 
