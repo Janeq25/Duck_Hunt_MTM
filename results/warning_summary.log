@@ -1,6 +1,6 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-07-18 13:56:25
+Created: 2023-07-18 14:29:40
 
 ----SYNTHESIS----
 WARNING: [Synth 8-6014] Unused sequential element set_x.inc_reg was removed.  [rtl/input/MouseCtl.vhd:450]
@@ -40,6 +40,7 @@ WARNING: [Synth 8-7129] Port out\.rgb[3] in module vga_timing is either unconnec
 WARNING: [Synth 8-7129] Port out\.rgb[2] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[1] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[0] in module vga_timing is either unconnected or has no load
+WARNING: [Synth 8-7129] Port btnC in module top_DH_basys3 is either unconnected or has no load
 WARNING: [Synth 8-327] inferring latch for variable 'duck_x_nxt_reg' [rtl/ctl/ctl_duck.sv:180]
 WARNING: [Synth 8-327] inferring latch for variable 'FSM_sequential_state_nxt_reg' [rtl/ctl/ctl_duck.sv:68]
 WARNING: [Synth 8-327] inferring latch for variable 'FSM_onehot_state_nxt_reg' [rtl/ctl/ctl_duck.sv:68]
@@ -74,15 +75,15 @@ WARNING: [Synth 8-7129] Port out\.rgb[3] in module vga_timing is either unconnec
 WARNING: [Synth 8-7129] Port out\.rgb[2] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[1] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[0] in module vga_timing is either unconnected or has no load
+WARNING: [Synth 8-7129] Port btnC in module top_DH_basys3 is either unconnected or has no load
 WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_duck/duck_x_nxt_reg[10]) is unused and will be removed from module top_DH_basys3.
 WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_duck/duck_y_nxt_reg[10]) is unused and will be removed from module top_DH_basys3.
 WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_duck/duck_hit_reg) is unused and will be removed from module top_DH_basys3.
+WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_score/hex3_nxt_reg[3]) is unused and will be removed from module top_DH_basys3.
+WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_score/hex3_nxt_reg[2]) is unused and will be removed from module top_DH_basys3.
+WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_score/hex3_nxt_reg[1]) is unused and will be removed from module top_DH_basys3.
+WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_score/hex3_nxt_reg[0]) is unused and will be removed from module top_DH_basys3.
 
 ----IMPLEMENTATION----
-ERROR: [Place 30-69] Instance btnC_IBUF_inst (IBUF driven by I/O terminal btnC) is unplaced after IO placer
-ERROR: [Place 30-575] Sub-optimal placement for a clock-capable IO pin and MMCM pair. If this sub optimal condition is acceptable for this design, you may use the CLOCK_DEDICATED_ROUTE constraint in the .xdc file to demote this message to a WARNING. However, the use of this override is highly discouraged. These examples can be used directly in the .xdc file to override this clock rule.
-	ERROR: The above is also an illegal clock rule
-ERROR: [Place 30-68] Instance btnC_IBUF_inst (IBUF) is not placed
-ERROR: [Place 30-99] Placer failed with error: 'IO Clock Placer failed'
-Please review all ERROR, CRITICAL WARNING, and WARNING messages during placement to understand the cause for failure.
-ERROR: [Common 17-69] Command failed: Placer could not place all instances
+WARNING: [DRC PDRC-153] Gated clock check: Net u_top_DH/u_ctl_duck/duck_x_nxt_reg[9]_i_2_n_0 is a gated clock net sourced by a combinational pin u_top_DH/u_ctl_duck/duck_x_nxt_reg[9]_i_2/O, cell u_top_DH/u_ctl_duck/duck_x_nxt_reg[9]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net u_top_DH/u_ctl_duck/state_nxt is a gated clock net sourced by a combinational pin u_top_DH/u_ctl_duck/FSM_onehot_state_nxt_reg[5]_i_2/O, cell u_top_DH/u_ctl_duck/FSM_onehot_state_nxt_reg[5]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.

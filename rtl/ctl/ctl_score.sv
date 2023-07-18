@@ -32,12 +32,13 @@ always_ff @(posedge clk) begin
     end
 end
 
+
 always_comb begin
     if(reset_score == 1) begin
         hex2_nxt = 4'b0;
         hex3_nxt = 4'b0;
     end
-    else if(hit == 1) begin
+    else if(hit) begin
         hex2_predicted = hex2 + 1;
         hex3_predicted = hex3 + 1;
 
@@ -60,5 +61,4 @@ always_comb begin
     end
 end
 
-
- endmodule
+endmodule

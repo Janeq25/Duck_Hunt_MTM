@@ -12,7 +12,7 @@
     input logic clk100MHz, //mouse clock 100MHz
     input logic rst,
 
-    input logic test_btn,
+    //input logic test_btn,
 
     output logic vs,
     output logic hs,
@@ -205,7 +205,7 @@ localparam H_SPEED = 10;
     .clk,
     .rst,
     .reset_score(0),
-    .hit(test_btn),
+    .hit(1),
 
     .hex2(digit_2),
     .hex3(digit_3)
