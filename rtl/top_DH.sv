@@ -148,6 +148,7 @@ localparam H_SPEED = 10;
  draw_bg u_draw_bg(
    .clk,
    .rst,
+   .new_frame,
 
    .in(timing_to_draw_bg.in),
    .out(draw_bg_to_draw_duck.out)

@@ -64,7 +64,7 @@ set vhdl_files {
 
 # Specify files for a memory initialization     -- EDIT
 set mem_files {
-    ../rtl/vga/DH_bg_downscaled.dat
+    ../rtl/vga/DH_bg_downscaled_title.dat
     ../rtl/vga/DH_duckA.dat
     ../rtl/vga/DH_duckB.dat
 }

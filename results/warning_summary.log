@@ -1,8 +1,9 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-07-17 20:34:54
+Created: 2023-07-18 13:19:19
 
 ----SYNTHESIS----
+WARNING: [Synth 8-2292] literal value truncated to fit in 8 bits [rtl/vga/draw_bg.sv:41]
 WARNING: [Synth 8-6014] Unused sequential element set_x.inc_reg was removed.  [rtl/input/MouseCtl.vhd:450]
 WARNING: [Synth 8-6014] Unused sequential element set_x.x_inter_reg was removed.  [rtl/input/MouseCtl.vhd:456]
 WARNING: [Synth 8-6014] Unused sequential element set_y.inc_reg was removed.  [rtl/input/MouseCtl.vhd:514]
