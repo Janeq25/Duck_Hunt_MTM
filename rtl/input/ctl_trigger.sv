@@ -59,7 +59,7 @@ end
 
 always_comb begin
     if (shot_fired) begin
-        hit_nxt = gun_is_connected ? gun_photodetector : mouse_left;
+        hit_nxt = gun_is_connected ? gun_photodetector : mouse_on_target;
     end
     else begin
         hit_nxt = 1'b0;
@@ -68,7 +68,7 @@ end
 
 always_comb begin
     if (shot_fired) begin
-        miss_nxt = gun_is_connected ? ~gun_photodetector : ~mouse_left;
+        miss_nxt = gun_is_connected ? ~gun_photodetector : ~mouse_on_target;
     end
     else begin
         miss_nxt = 1'b0;

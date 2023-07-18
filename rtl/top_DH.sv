@@ -58,6 +58,9 @@ localparam H_SPEED = 10;
 
   //gun signals
    logic gun_is_connected;
+   logic hit;
+   logic miss;
+   logic shot_fired;
 
   // 7 seg display signals
    logic [3:0] digit_3, digit_2;
@@ -67,10 +70,10 @@ localparam H_SPEED = 10;
  assign hs = draw_duck_to_out.hsync;
  assign {r,g,b} = draw_duck_to_out.rgb;
 
- assign led[15:6] = '0;
+ assign led[15:3] = '0;
  assign led[0] = gun_trigger;
  assign led[1] = gun_photodetector;
- assign led[5] = gun_is_connected;
+ assign led[2] = gun_is_connected;
 
  // modules
 
@@ -131,9 +134,9 @@ localparam H_SPEED = 10;
     .mouse_left(mouse_left),
     .mouse_on_target,
 
-    .hit(led[4]),
-    .miss(led[3]),
-    .shot_fired(led[2])
+    .hit,
+    .miss,
+    .shot_fired
   );
 
 
@@ -200,7 +203,7 @@ localparam H_SPEED = 10;
     .clk,
     .rst,
     .reset_score(0),
-    .hit(0),
+    .hit,
 
     .hex2(digit_2),
     .hex3(digit_3)
