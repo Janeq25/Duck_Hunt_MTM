@@ -42,14 +42,13 @@ localparam H_SPEED = 10;
 
  // ctl_duck signals
    logic duck_direction;
+
    logic [4:0] vertical_speed;
    logic [9:0] duck_start_x_coordinate;
    logic [9:0] duck_x;
    logic [9:0] duck_y;
    logic duck_hit;
    logic duck_show;
-
-
 
  //mouse signals
    logic [11:0] xpos;
@@ -59,6 +58,9 @@ localparam H_SPEED = 10;
 
   //gun signals
    logic gun_is_connected;
+
+  // 7 seg display signals
+   logic [3:0] digit_3, digit_2;
 
  // signal assignments
  assign vs = draw_duck_to_out.vsync;
@@ -184,7 +186,6 @@ localparam H_SPEED = 10;
   .rst,
   .new_frame,
   .duck_direction(duck_direction),
-  //.reflections(15),
   .duck_v_spd(vertical_speed),
   .duck_h_spd(H_SPEED),
   .duck_start_x(duck_start_x_coordinate),
@@ -195,6 +196,16 @@ localparam H_SPEED = 10;
   .duck_y
  );
 
+ ctl_score u_ctl_score(
+    .clk,
+    .rst,
+    .reset_score(0),
+    .hit(0),
+
+    .hex2(digit_2),
+    .hex3(digit_3)
+);
+
  // -----------------
 
  disp_hex_mux u_disp_hex_mux (
@@ -202,8 +213,8 @@ localparam H_SPEED = 10;
     .reset(rst),
     .hex0(4'b0100), //ammo x1
     .hex1(4'b0011), //ammo x10
-    .hex2(4'b0010), //score x1
-    .hex3(4'b0001), //score x10
+    .hex2(digit_2), //score x1
+    .hex3(digit_3), //score x10
     .dp_in(4'b1011), //dot
     .an,
     .sseg({dp, seg})
