@@ -1,6 +1,6 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-07-18 16:33:16
+Created: 2023-07-19 14:34:02
 
 ----SYNTHESIS----
 WARNING: [Synth 8-6014] Unused sequential element set_x.inc_reg was removed.  [rtl/input/MouseCtl.vhd:450]

@@ -27,10 +27,14 @@ localparam CLK_PERIOD = 15;     // 65 MHz
 logic clk;
 logic rst;
 
-logic [3:0] dut_out;
-logic [3:0] dut_in;
-
 logic gun_is_connected;
+logic gun_photodetector;
+logic gun_trigger;
+logic mouse_left;
+logic mouse_on_target;
+logic hit;
+logic miss;
+logic shot_fired;
 
 
 
@@ -41,7 +45,10 @@ logic gun_is_connected;
 
 initial begin
     clk = 1'b0;
-    dut_in = '0;
+    gun_photodetector = 1'b0;
+    gun_trigger = 1'b0;
+    mouse_left = 1'b0;
+    mouse_on_target = 1'b0;
     forever #(CLK_PERIOD/2) clk = ~clk;
 end
 
@@ -55,7 +62,6 @@ initial begin
     #(1.25*CLK_PERIOD) rst = 1'b1;
                        rst = 1'b1;
     #(2.00*CLK_PERIOD) rst = 1'b0;
-    forever #(10*CLK_PERIOD/2) dut_in = dut_in + 1;
 end
 
 
@@ -71,8 +77,8 @@ gun_conn_detector u_gun_conn_detector(
 
     .gun_is_connected,
 
-    .gun_photodetector(dut_in[0]),
-    .gun_trigger(dut_in[1])
+    .gun_photodetector,
+    .gun_trigger
 
 );
 
@@ -80,19 +86,17 @@ ctl_trigger u_dut(
     .clk,
     .rst,
 
-    .gun_photodetector(dut_in[0]),
-    .gun_trigger(~dut_in[1]),
+    .gun_photodetector,
+    .gun_trigger,
 
-    .mouse_on_target(dut_in[2]),
-    .mouse_left(dut_in[3]),
+    .mouse_on_target,
+    .mouse_left,
 
     .gun_is_connected,
-    .hit(dut_out[1]),
-    .miss(dut_out[2]),
-    .shot_fired(dut_out[3])
+    .hit,
+    .miss,
+    .shot_fired
 );
-
-assign dut_out[0] = gun_is_connected;
 
 /**
  * Main test
@@ -100,14 +104,41 @@ assign dut_out[0] = gun_is_connected;
 
 
 initial begin
-    $monitor("for: gunDet=%b, gunTrig=%b, mouseDet=%b, mouseTrig=%b outputs: gunIsConn=%b, hit=%b, miss=%b, shot=%b \n", dut_in[0], dut_in[1], dut_in[2], dut_in[3], dut_out[0], dut_out[1], dut_out[2], dut_out[3]);
+    $monitor("for: gunDet=%b, gunTrig=%b, mouseDet=%b, mouseTrig=%b outputs: gunIsConn=%b, hit=%b, miss=%b, shot=%b \n", gun_photodetector, gun_trigger, mouse_left, mouse_on_target, gun_is_connected, hit, miss, shot_fired);
 end
 
 initial begin
     @(posedge rst);
     @(negedge rst);
 
-    @(negedge dut_in[3]);
+
+    #(2.00*CLK_PERIOD) $display("connecting gun");
+    #(2.00*CLK_PERIOD) gun_trigger = 1'b1;
+
+    #(2.00*CLK_PERIOD) $display("gun misses");
+    #(2.00*CLK_PERIOD) gun_photodetector = 1'b0;
+    #(2.00*CLK_PERIOD) gun_trigger = 1'b0;
+    #(2.00*CLK_PERIOD) gun_trigger = 1'b1;
+
+    #(2.00*CLK_PERIOD) $display("gun hits");
+    #(2.00*CLK_PERIOD) gun_photodetector = 1'b1;
+    #(2.00*CLK_PERIOD) gun_trigger = 1'b0;
+    #(2.00*CLK_PERIOD) gun_trigger = 1'b1;
+
+    #(2.00*CLK_PERIOD) $display("disconnecting gun");
+    #(2.00*CLK_PERIOD) gun_photodetector = 1'b0;
+    #(2.00*CLK_PERIOD) gun_trigger = 1'b0;
+
+    #(2.00*CLK_PERIOD) $display("mouse misses");
+    #(2.00*CLK_PERIOD) mouse_on_target = 1'b0;
+    #(2.00*CLK_PERIOD) mouse_left = 1'b1;
+    #(2.00*CLK_PERIOD) mouse_left = 1'b0;
+
+    #(2.00*CLK_PERIOD) $display("mouse hits");
+    #(2.00*CLK_PERIOD) mouse_on_target = 1'b1;
+    #(2.00*CLK_PERIOD) mouse_left = 1'b1;
+    #(2.00*CLK_PERIOD) mouse_left = 1'b0;
+
     $finish;
 
 end
