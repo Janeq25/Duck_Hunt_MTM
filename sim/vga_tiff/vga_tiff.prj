@@ -12,11 +12,15 @@
 sv work ../../rtl/vga/vga_pkg.sv \
         ../../rtl/vga/vga_timing.sv \
         ../../rtl/vga/draw_bg.sv \
-        ../../rtl/top_DH.sv \
+        ../../rtl/vga/draw_duck.sv \
+        ../../rtl/vga/draw_crosshair.sv \
         ../../rtl/vga/itf_vga.sv \
+        ../../rtl/vga/template_rom.sv \
+        ../../rtl/vga/template_rom.sv \
+        ../../rtl/top_DH.sv \
         ../../rtl/clk/clk_wiz_0_clk_wiz.v \
         ../../rtl/clk/clk_wiz_0.v \
-        ../../rtl/vga/template_rom.sv \
+        ../../rtl/input/MouseCtl.vhd \
         tiff_writer.sv \
         vga_tiff_tb.sv
 

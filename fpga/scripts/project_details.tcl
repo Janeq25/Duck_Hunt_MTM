@@ -41,6 +41,7 @@ set sv_files {
     ../rtl/vga/vga_pkg.sv
     ../rtl/vga/template_rom.sv
     ../rtl/vga/draw_duck.sv
+    ../rtl/vga/draw_crosshair.sv
     ../rtl/rng/flip_flop.sv
     ../rtl/rng/random_number_generator.sv
     ../rtl/ctl/ctl_duck.sv
@@ -48,6 +49,8 @@ set sv_files {
     ../rtl/input/gun_conn_detector.sv
     ../rtl/input/mouse_hit_detector.sv
     ../rtl/ctl/ctl_score.sv
+ 
+
 }
 
 # Specify Verilog design files location         -- EDIT
