@@ -1,6 +1,6 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-07-19 12:47:59
+Created: 2023-07-19 15:02:58
 
 ----SYNTHESIS----
 WARNING: [Synth 8-6014] Unused sequential element set_x.inc_reg was removed.  [rtl/input/MouseCtl.vhd:450]
@@ -128,12 +128,12 @@ WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[2]  is
 WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[2]  is always disabled
 WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[3]  is always disabled
 WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[3]  is always disabled
-WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[0]  is always disabled
-WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[0]  is always disabled
 WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[2]  is always disabled
 WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[2]  is always disabled
 WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[1]  is always disabled
 WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[1]  is always disabled
+WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[0]  is always disabled
+WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[0]  is always disabled
 WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[3]  is always disabled
 WARNING: [Synth 8-264] enable of latch \u_top_DH/u_ctl_score/hex3_nxt_reg[3]  is always disabled
 WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_score/hex3_nxt_reg[3]) is unused and will be removed from module top_DH_basys3.

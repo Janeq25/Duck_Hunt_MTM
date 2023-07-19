@@ -9,11 +9,7 @@
 
 `timescale 1 ns / 1 ps
 
-// localparam RECTANGLE_POS_X = 150;
-// localparam RECTANGLE_POS_Y = 100;
-localparam RECTANGLE_WIDTH = 50;
-localparam RECTANGLE_HEIGHT = 50;
-localparam RECTANGLE_COLOUR = 12'h0_f_0;
+localparam CROSSHAIR_COLOUR = 12'hf_0_0;
 
 module draw_crosshair(
     input logic rst,
@@ -47,7 +43,7 @@ always_ff @(posedge clk) begin
 end
 
 
-always_ff @(posedge clk) begin: rectangle_ff_blk
+always_ff @(posedge clk) begin: crosshair_ff_blk
     if(rst) begin
         out.hcount <= '0;
         out.hsync <= '0;
@@ -77,9 +73,9 @@ always_ff @(posedge clk) begin: rectangle_ff_blk
     end
 end
 
-always_comb begin: rectangle_comb_blk
-    if ((in.hcount >= xpos_sync) && (in.hcount < xpos_sync + RECTANGLE_WIDTH) && (in.vcount >= ypos_sync) && (in.vcount < ypos_sync + RECTANGLE_HEIGHT)) begin
-        rgb_nxt = RECTANGLE_COLOUR;
+always_comb begin: crosshair_comb_blk
+    if ((((in.hcount > xpos_sync - 20) || (xpos_sync < 20)) && (in.hcount < xpos_sync + 20) && (in.vcount == ypos_sync)) || (((in.vcount > ypos_sync - 20) || (ypos_sync < 20)) && (in.vcount < ypos_sync + 20) && (in.hcount == xpos_sync))) begin
+        rgb_nxt = CROSSHAIR_COLOUR;
     end
     else begin
         rgb_nxt = in.rgb;
