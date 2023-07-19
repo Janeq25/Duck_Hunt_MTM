@@ -35,7 +35,8 @@ localparam H_SPEED = 10;
  // interfaces
    itf_vga timing_to_draw_bg();
    itf_vga draw_bg_to_draw_duck();
-   itf_vga draw_duck_to_out();
+   itf_vga draw_duck_to_draw_crosshair();
+   itf_vga draw_crosshair_to_out();
 
  // local signals
    logic new_frame;
@@ -63,9 +64,9 @@ localparam H_SPEED = 10;
    logic [3:0] digit_3, digit_2;
 
  // signal assignments
- assign vs = draw_duck_to_out.vsync;
- assign hs = draw_duck_to_out.hsync;
- assign {r,g,b} = draw_duck_to_out.rgb;
+ assign vs = draw_crosshair_to_out.vsync;
+ assign hs = draw_crosshair_to_out.hsync;
+ assign {r,g,b} = draw_crosshair_to_out.rgb;
 
  assign led[15:6] = '0;
  assign led[0] = gun_trigger;
@@ -166,8 +167,19 @@ localparam H_SPEED = 10;
   .duck_y,
 
   .in(draw_bg_to_draw_duck.in),
-  .out(draw_duck_to_out.out)
+  .out(draw_duck_to_draw_crosshair.out)
 
+ );
+
+ draw_crosshair u_draw_crosshair(
+  .rst,
+  .clk,
+  .xpos,
+  .ypos,
+  .gun_is_connected,
+  
+  .in(draw_duck_to_draw_crosshair.in),
+  .out(draw_crosshair_to_out.out)
  );
 
   // ---ctrl section-----

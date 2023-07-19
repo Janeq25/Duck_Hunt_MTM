@@ -15,12 +15,12 @@ localparam RECTANGLE_WIDTH = 50;
 localparam RECTANGLE_HEIGHT = 50;
 localparam RECTANGLE_COLOUR = 12'h0_f_0;
 
-module draw_rect(
+module draw_crosshair(
     input logic rst,
     input logic clk,
-
-    input logic [11:0] x_pos,
-    input logic [11:0] y_pos,
+    input logic [11:0] xpos,
+    input logic [11:0] ypos,
+    input logic gun_is_connected,
 
     itf_vga.in in,
     itf_vga.out out
@@ -34,21 +34,21 @@ import vga_pkg::*;
 
 logic [11:0] rgb_nxt;
 
-logic [11:0] x_pos_sync;
-logic [11:0] y_pos_sync;
+logic [11:0] xpos_sync;
+logic [11:0] ypos_sync;
 
 /**
  * Internal logic
  */
 
 always_ff @(posedge clk) begin
-    x_pos_sync <= x_pos;
-    y_pos_sync <= y_pos;
+    xpos_sync <= xpos;
+    ypos_sync <= ypos;
 end
 
 
 always_ff @(posedge clk) begin: rectangle_ff_blk
-    if (rst) begin
+    if(rst) begin
         out.hcount <= '0;
         out.hsync <= '0;
         out.hblnk <= '0;
@@ -56,6 +56,15 @@ always_ff @(posedge clk) begin: rectangle_ff_blk
         out.vsync <= '0;
         out.vblnk <= '0;
         out.rgb <= '0;
+    end
+    else if(gun_is_connected) begin
+        out.hcount <= in.hcount;
+        out.hsync <= in.hsync;
+        out.hblnk <= in.hblnk;
+        out.vcount <= in.vcount;
+        out.vsync <= in.vsync;
+        out.vblnk <= in.vblnk;
+        out.rgb <= in.rgb;
     end
     else begin
         out.hcount <= in.hcount;
@@ -69,7 +78,7 @@ always_ff @(posedge clk) begin: rectangle_ff_blk
 end
 
 always_comb begin: rectangle_comb_blk
-    if ((in.hcount >= x_pos_sync) && (in.hcount < x_pos_sync + RECTANGLE_WIDTH) && (in.vcount >= y_pos_sync) && (in.vcount < y_pos_sync + RECTANGLE_HEIGHT)) begin
+    if ((in.hcount >= xpos_sync) && (in.hcount < xpos_sync + RECTANGLE_WIDTH) && (in.vcount >= ypos_sync) && (in.vcount < ypos_sync + RECTANGLE_HEIGHT)) begin
         rgb_nxt = RECTANGLE_COLOUR;
     end
     else begin
