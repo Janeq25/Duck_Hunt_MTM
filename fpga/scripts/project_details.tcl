@@ -43,6 +43,7 @@ set sv_files {
     ../rtl/vga/draw_duck.sv
     ../rtl/vga/draw_crosshair.sv
     ../rtl/vga/draw_target.sv
+    ../rtl/vga/draw_overlay.sv
     ../rtl/rng/flip_flop.sv
     ../rtl/rng/random_number_generator.sv
     ../rtl/ctl/ctl_duck.sv

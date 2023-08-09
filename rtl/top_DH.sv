@@ -29,8 +29,12 @@
     inout logic ps2_data,
 
     input logic gun_trigger,
-    input logic gun_photodetector
+    input logic gun_photodetector,
+
+    input logic [15:0] sw
  );
+
+
 
 localparam H_SPEED = 10;
 
@@ -39,8 +43,11 @@ localparam H_SPEED = 10;
    itf_vga draw_bg_to_draw_duck();
    itf_vga draw_duck_to_draw_crosshair();
    itf_vga draw_crosshair_to_draw_target();
-   itf_vga draw_target_to_out();
+   itf_vga draw_target_to_draw_overlay();
+   itf_vga draw_overlay_to_out();
 
+
+   
  // local signals
    logic new_frame;
 
@@ -70,15 +77,17 @@ localparam H_SPEED = 10;
    logic [3:0] digit_3, digit_2;
 
  // signal assignments
- assign vs = draw_target_to_out.vsync;
- assign hs = draw_target_to_out.hsync;
- assign {r,g,b} = draw_target_to_out.rgb;
+ assign vs = draw_overlay_to_out.vsync;
+ assign hs = draw_overlay_to_out.hsync;
+ assign {r,g,b} = draw_overlay_to_out.rgb;
+
 
  assign led[15:3] = '0;
  assign led[0] = gun_trigger;
  assign led[1] = gun_photodetector;
  assign led[2] = gun_is_connected;
 
+ 
  // modules
 
  // --- input section ---
@@ -162,6 +171,8 @@ localparam H_SPEED = 10;
    .out(draw_bg_to_draw_duck.out)
  );
 
+ 
+
  draw_duck u_draw_duck(
   .clk,
   .rst,
@@ -199,7 +210,17 @@ localparam H_SPEED = 10;
   .gun_is_connected,
 
   .in(draw_crosshair_to_draw_target.in),
-  .out(draw_target_to_out.out)
+  .out(draw_target_to_draw_overlay.out)
+);
+
+draw_overlay u_draw_overlay (
+  .clk,
+  .rst,
+
+  .gun_calibration(sw[15]),
+
+  .in(draw_target_to_draw_overlay.in),
+  .out(draw_overlay_to_out.out)
 );
 
   // ---ctrl section-----

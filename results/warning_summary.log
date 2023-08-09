@@ -1,12 +1,10 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-07-26 13:35:39
+Created: 2023-08-09 13:28:08
 
 ----SYNTHESIS----
-WARNING: [Synth 8-6014] Unused sequential element set_x.inc_reg was removed.  [rtl/input/MouseCtl.vhd:450]
-WARNING: [Synth 8-6014] Unused sequential element set_x.x_inter_reg was removed.  [rtl/input/MouseCtl.vhd:456]
-WARNING: [Synth 8-6014] Unused sequential element set_y.inc_reg was removed.  [rtl/input/MouseCtl.vhd:514]
-WARNING: [Synth 8-6014] Unused sequential element set_y.y_inter_reg was removed.  [rtl/input/MouseCtl.vhd:520]
+WARNING: [Synth 8-9661] initial value of parameter 'TARGET_WIDTH' is omitted [rtl/input/mouse_hit_detector.sv:10]
+WARNING: [Synth 8-9661] initial value of parameter 'TARGET_HEIGHT' is omitted [rtl/input/mouse_hit_detector.sv:10]
 WARNING: [Synth 8-3848] Net out\.rgb in module/entity vga_timing does not have driver. [rtl/vga/vga_timing.sv:18]
 WARNING: [Synth 8-6014] Unused sequential element frame_ctr_reg was removed.  [rtl/ctl/ctl_duck.sv:165]
 WARNING: [Synth 8-87] always_comb on 'state_nxt_reg' did not result in combinational logic [rtl/ctl/ctl_duck.sv:68]
@@ -40,6 +38,21 @@ WARNING: [Synth 8-7129] Port out\.rgb[2] in module vga_timing is either unconnec
 WARNING: [Synth 8-7129] Port out\.rgb[1] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[0] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port test_btn in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[14] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[13] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[12] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[11] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[10] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[9] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[8] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[7] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[6] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[5] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[4] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[3] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[2] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[1] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[0] in module top_DH is either unconnected or has no load
 WARNING: [Synth 8-327] inferring latch for variable 'duck_x_nxt_reg' [rtl/ctl/ctl_duck.sv:180]
 WARNING: [Synth 8-327] inferring latch for variable 'FSM_sequential_state_nxt_reg' [rtl/ctl/ctl_duck.sv:68]
 WARNING: [Synth 8-327] inferring latch for variable 'FSM_onehot_state_nxt_reg' [rtl/ctl/ctl_duck.sv:68]
@@ -74,10 +87,27 @@ WARNING: [Synth 8-7129] Port out\.rgb[2] in module vga_timing is either unconnec
 WARNING: [Synth 8-7129] Port out\.rgb[1] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[0] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port test_btn in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[14] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[13] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[12] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[11] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[10] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[9] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[8] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[7] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[6] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[5] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[4] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[3] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[2] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[1] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port sw[0] in module top_DH is either unconnected or has no load
 WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_duck/duck_x_nxt_reg[10]) is unused and will be removed from module top_DH_basys3.
 WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_duck/duck_y_nxt_reg[10]) is unused and will be removed from module top_DH_basys3.
 WARNING: [Synth 8-3332] Sequential element (u_top_DH/u_ctl_duck/duck_hit_reg) is unused and will be removed from module top_DH_basys3.
 
 ----IMPLEMENTATION----
+CRITICAL WARNING: [Common 17-69] Command failed: Site cannot be assigned to more than one port [fpga/constraints/top_DH_basys3.xdc:12]
+WARNING: [Place 30-87] Partially locked IO Bus is found. Following components of the IO Bus sw are not locked:  'sw[0]' 
 WARNING: [DRC PDRC-153] Gated clock check: Net u_top_DH/u_ctl_duck/duck_x_nxt_reg[9]_i_2_n_0 is a gated clock net sourced by a combinational pin u_top_DH/u_ctl_duck/duck_x_nxt_reg[9]_i_2/O, cell u_top_DH/u_ctl_duck/duck_x_nxt_reg[9]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 WARNING: [DRC PDRC-153] Gated clock check: Net u_top_DH/u_ctl_duck/state_nxt is a gated clock net sourced by a combinational pin u_top_DH/u_ctl_duck/FSM_onehot_state_nxt_reg[5]_i_2/O, cell u_top_DH/u_ctl_duck/FSM_onehot_state_nxt_reg[5]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.

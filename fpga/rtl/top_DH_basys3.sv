@@ -9,7 +9,7 @@
 
 module top_DH_basys3 ( //connections order the same as in constraints file
     input logic clk,
-    // input logic [15:0] sw,
+    input logic [15:0] sw,
     output logic [15:0] led,
     output logic [6:0] seg,
     output logic dp,
@@ -67,7 +67,9 @@ module top_DH_basys3 ( //connections order the same as in constraints file
     .ps2_data(PS2Data),
 
     .gun_trigger(JA3),
-    .gun_photodetector(JA2)
+    .gun_photodetector(JA2),
+
+    .sw
  );
 
 
