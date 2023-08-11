@@ -87,7 +87,7 @@ localparam DISCONNECTED_DATA = " DISCONNECTED ";
 localparam DISCONNECTED_COLOR = 12'h0_f_f;
 
 localparam SW15_X = 0;
-localparam SW15_Y = 650;
+localparam SW15_Y = 700;
 localparam SW15_SIZE_X = 15;
 localparam SW15_SIZE_Y = 1;
 localparam SW15_DATA = " SW15 for HELP ";
