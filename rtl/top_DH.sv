@@ -217,11 +217,14 @@ draw_overlay u_draw_overlay (
   .clk,
   .rst,
 
-  .gun_calibration(sw[15]),
+  .pause(sw[15]),
+  .p2_connected(sw[14]),
+  .looser(sw[13]),
 
   .in(draw_target_to_draw_overlay.in),
   .out(draw_overlay_to_out.out)
 );
+
 
   // ---ctrl section-----
 

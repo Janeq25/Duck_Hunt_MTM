@@ -44,6 +44,8 @@ set sv_files {
     ../rtl/vga/draw_crosshair.sv
     ../rtl/vga/draw_target.sv
     ../rtl/vga/draw_overlay.sv
+    ../rtl/ctl_text/char_rect.sv
+    ../rtl/ctl_text/draw_char_rect.sv
     ../rtl/rng/flip_flop.sv
     ../rtl/rng/random_number_generator.sv
     ../rtl/ctl/ctl_duck.sv
@@ -60,6 +62,8 @@ set verilog_files {
     ../rtl/clk/clk_wiz_0_clk_wiz.v
     ../rtl/clk/clk_wiz_0.v
     ../rtl/score_display/disp_hex_mux.v
+    ../rtl/ctl_text/font_rom.v
+    ../rtl/ctl_text/delay.v
 }
 
 # Specify VHDL design files location            -- EDIT
