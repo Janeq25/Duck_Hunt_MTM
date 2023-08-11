@@ -67,17 +67,19 @@ localparam H_SPEED = 10;
    logic shot_fired;
 
   // 7 seg display signals
-   logic [3:0] digit_3, digit_2;
+   logic [3:0] digit_3, digit_2, digit_1, digit_0;
+   logic no_ammo;
 
  // signal assignments
  assign vs = draw_target_to_out.vsync;
  assign hs = draw_target_to_out.hsync;
  assign {r,g,b} = draw_target_to_out.rgb;
 
- assign led[15:3] = '0;
+ assign led[15:4] = '0;
  assign led[0] = gun_trigger;
  assign led[1] = gun_photodetector;
  assign led[2] = gun_is_connected;
+ assign led[3] = no_ammo;
 
  // modules
 
@@ -231,11 +233,22 @@ localparam H_SPEED = 10;
  ctl_score u_ctl_score(
     .clk,
     .rst,
-    .reset_score(0),
+    .reset_score(test_btn),
     .hit,
 
     .hex2(digit_2),
     .hex3(digit_3)
+);
+
+ctl_ammo u_ctl_ammo(
+  .clk,
+  .rst,
+  .reset_score(test_btn),
+  .shot_fired,
+  
+  .no_ammo,
+  .hex0(digit_0),
+  .hex1(digit_1)
 );
 
  // -----------------
@@ -243,8 +256,8 @@ localparam H_SPEED = 10;
  disp_hex_mux u_disp_hex_mux (
     .clk,
     .reset(rst),
-    .hex0(4'b0100), //ammo x1
-    .hex1(4'b0011), //ammo x10
+    .hex0(digit_0), //ammo x1
+    .hex1(digit_1), //ammo x10
     .hex2(digit_2), //score x1
     .hex3(digit_3), //score x10
     .dp_in(4'b1011), //dot
