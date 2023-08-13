@@ -411,7 +411,7 @@ always_comb begin
             rgb_nxt = connected_rgb;
             addr = {char_code_connected, char_line_connected};
         end
-        else if (delayed.hcount > CONNECTED_X && delayed.vcount > CONNECTED_Y && delayed.hcount < CONNECTED_X+(CONNECTED_SIZE_X*8) && delayed.vcount < CONNECTED_Y+(CONNECTED_SIZE_Y*16) && ~p2_connected) begin
+        else if (delayed.hcount > DISCONNECTED_X && delayed.vcount > DISCONNECTED_Y && delayed.hcount < DISCONNECTED_X+(DISCONNECTED_SIZE_X*8) && delayed.vcount < DISCONNECTED_Y+(DISCONNECTED_SIZE_Y*16) && ~p2_connected) begin
             rgb_nxt = disconnected_rgb;
             addr = {char_code_disconnected, char_line_disconnected};
         end

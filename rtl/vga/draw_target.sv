@@ -27,7 +27,7 @@ module draw_target(
  * Local variables and signals
  */
 
-localparam TARGET_FRAMES = 60;
+localparam TARGET_FRAMES = 10;
 localparam TARGET_WIDTH = 50;
 localparam TARGET_HEIGHT = 50;
 

@@ -66,6 +66,7 @@ set verilog_files {
     ../rtl/score_display/disp_hex_mux.v
     ../rtl/ctl_text/font_rom.v
     ../rtl/ctl_text/delay.v
+    ../rtl/input/debounce.v
 }
 
 # Specify VHDL design files location            -- EDIT

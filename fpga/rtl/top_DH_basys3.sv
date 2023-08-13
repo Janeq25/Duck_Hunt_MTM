@@ -66,8 +66,8 @@ module top_DH_basys3 ( //connections order the same as in constraints file
     .ps2_clk(PS2Clk),
     .ps2_data(PS2Data),
 
-    .gun_trigger(JA3),
-    .gun_photodetector(JA2),
+    .gun_trigger_raw(JA3),
+    .gun_photodetector_raw(JA2),
 
     .sw
  );

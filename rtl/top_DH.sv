@@ -24,14 +24,14 @@
     output logic dp,
 
     output logic [15:0] led,
+    input logic [15:0] sw,
 
     inout logic ps2_clk,
     inout logic ps2_data,
 
-    input logic gun_trigger,
-    input logic gun_photodetector,
+    input logic gun_trigger_raw,
+    input logic gun_photodetector_raw
 
-    input logic [15:0] sw
  );
 
 
@@ -64,10 +64,14 @@ localparam H_SPEED = 10;
  //mouse signals
    logic [11:0] xpos;
    logic [11:0] ypos;
+   logic mouse_left_raw;
    logic mouse_left;
    logic mouse_on_target;
 
   //gun signals
+   logic gun_trigger;
+   logic gun_photodetector;
+
    logic gun_is_connected;
    logic hit;
    logic miss;
@@ -102,7 +106,7 @@ localparam H_SPEED = 10;
 
     .xpos(xpos),
     .ypos(ypos),
-    .left(mouse_left),
+    .left(mouse_left_raw),
     
     .zpos(),
     .middle(),
@@ -114,6 +118,14 @@ localparam H_SPEED = 10;
     .setmax_x('0),
     .setmax_y('0)
     );
+
+  debounce u_mouse_debounce(
+    .clk,
+    .reset(rst),
+    .sw(mouse_left_raw),
+    .db_level(),
+    .db_tick(mouse_left)
+  );
 
   mouse_hit_detector #(.TARGET_HEIGHT(48), .TARGET_WIDTH(64)) u_mouse_hit_detector(
     .clk,
@@ -138,9 +150,26 @@ localparam H_SPEED = 10;
     .gun_trigger
   );
 
+  debounce u_gun_trigger_debounce(
+    .clk,
+    .reset(rst),
+    .sw(gun_trigger_raw),
+    .db_level(gun_trigger),
+    .db_tick()
+  );
+
+  debounce u_gun_photodetector_debounce(
+    .clk,
+    .reset(rst),
+    .sw(gun_photodetector_raw),
+    .db_level(gun_photodetector),
+    .db_tick()
+  );
+
   ctl_trigger u_ctl_trigger(
     .clk,
     .rst,
+    .new_frame,
 
     .gun_is_connected,
     .gun_photodetector,

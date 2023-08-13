@@ -11,6 +11,7 @@
  module ctl_trigger(
     input logic clk,
     input logic rst,
+    input logic new_frame,
 
     input logic gun_is_connected,
 
@@ -32,33 +33,58 @@
     logic miss_nxt;
     logic shot_fired_nxt;
 
+    logic trigger_delayed_last;
+    logic shot_fired_delayed;
+    logic shot_fired_delayed_nxt;
+    logic trigger_delayed;
+    logic gun_trigger_delayed;
+
+
+
  // signal assignments
     assign trigger = gun_is_connected ? ~gun_trigger : mouse_left;
-    assign shot_fired_nxt = trigger && ~trigger_last;
+    assign shot_fired_nxt = ~trigger && trigger_last; // signals sent to other modules (slightly before reading if shot connected to give time for controller to set)
 
+
+ // trigger delay for controller sync
+
+    delay #(.CLK_DEL(10), .WIDTH(1)) gun_trigger_delay (
+        .clk(new_frame),
+        .rst,
+        .din(gun_trigger),
+        .dout(gun_trigger_delayed)
+    );
+
+    assign trigger_delayed = gun_is_connected ? ~gun_trigger_delayed : mouse_left;
+    assign shot_fired_delayed_nxt = ~trigger_delayed && trigger_delayed_last; // delayed internal signals
 
  // sequential logic
 always_ff @(posedge clk) begin
     if (rst) begin
         trigger_last <= 1'b0;
+        trigger_delayed_last <= 1'b0;
 
         hit <= 1'b0;
         miss <= 1'b0;
         shot_fired <= 1'b0;
+        shot_fired_delayed <= 1'b0;
     end
     else begin
         trigger_last <= trigger;
+        trigger_delayed_last <= trigger_delayed;
 
         hit <= hit_nxt;
         miss <= miss_nxt;
         shot_fired <= shot_fired_nxt;
+        shot_fired_delayed <= shot_fired_delayed_nxt;
     end
 end
 
- //combinationa logic
+ //combinational logic   
+
 
 always_comb begin
-    if (shot_fired) begin
+    if (shot_fired_delayed) begin
         hit_nxt = gun_is_connected ? gun_photodetector : mouse_on_target;
     end
     else begin
@@ -67,7 +93,7 @@ always_comb begin
 end
 
 always_comb begin
-    if (shot_fired) begin
+    if (shot_fired_delayed) begin
         miss_nxt = gun_is_connected ? ~gun_photodetector : ~mouse_on_target;
     end
     else begin
