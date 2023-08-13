@@ -64,7 +64,7 @@ end
 //combinational logic
 
 always_comb begin
-    if(~shot_last && shot_fired) begin : ammo_ctr_comb
+    if(~shot_last && shot_fired && ~(ammo_ctr == '0)) begin : ammo_ctr_comb
         ammo_ctr_nxt = ammo_ctr - 1;
     end
     else begin

@@ -122,7 +122,7 @@ localparam H_SPEED = 10;
   debounce u_mouse_debounce(
     .clk,
     .reset(rst),
-    .sw(mouse_left_raw),
+    .sw(mouse_left_raw & ~(no_ammo)),
     .db_level(),
     .db_tick(mouse_left)
   );
@@ -153,7 +153,7 @@ localparam H_SPEED = 10;
   debounce u_gun_trigger_debounce(
     .clk,
     .reset(rst),
-    .sw(gun_trigger_raw),
+    .sw(gun_trigger_raw & ~(no_ammo)),
     .db_level(gun_trigger),
     .db_tick()
   );
@@ -248,7 +248,7 @@ draw_overlay u_draw_overlay (
   .clk,
   .rst,
 
-  .pause(sw[15]),
+  .pause(sw[15] | no_ammo),
   .p2_connected(sw[14]),
   .looser(sw[13]),
 
