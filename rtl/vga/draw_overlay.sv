@@ -14,6 +14,7 @@ module draw_overlay(
     input logic pause,
     input logic p2_connected,
     input logic looser,
+    input logic no_ammo,
 
     itf_vga.in in,
     itf_vga.out out
@@ -93,6 +94,14 @@ localparam SW15_SIZE_Y = 1;
 localparam SW15_DATA = " SW15 for HELP ";
 localparam SW15_COLOR = 12'hf_0_0;
 
+localparam NO_AMMO_X = 0;
+localparam NO_AMMO_Y = 500;
+localparam NO_AMMO_SIZE_X = 32;
+localparam NO_AMMO_SIZE_Y = 2;
+localparam NO_AMMO_DATA = {" OUT OF AMMO?                   ",
+                           " PRESS MIDDLE BUTTON TO RELOAD! "};
+localparam NO_AMMO_COLOR = 12'hc_0_0;
+
 //internal signals
 logic [11:0] rgb_nxt;
 logic [11:0] help_rgb;
@@ -103,6 +112,7 @@ logic [11:0] player2_rgb;
 logic [11:0] connected_rgb;
 logic [11:0] disconnected_rgb;
 logic [11:0] sw15_rgb;
+logic [11:0] no_ammo_rgb;
 
 
 logic [6:0] char_code_help;
@@ -121,6 +131,8 @@ logic [6:0] char_code_disconnected;
 logic [3:0] char_line_disconnected;
 logic [6:0] char_code_sw15;
 logic [3:0] char_line_sw15;
+logic [6:0] char_code_no_ammo;
+logic [3:0] char_line_no_ammo;
 
 logic [10:0] addr;
 logic [7:0] char_pixels;
@@ -354,6 +366,32 @@ draw_char_rect #(
 
 );
 
+draw_char_rect #(
+    .RECT_X(NO_AMMO_X),
+    .RECT_Y(NO_AMMO_Y),
+    .SIZE_X(NO_AMMO_SIZE_X),
+    .SIZE_Y(NO_AMMO_SIZE_Y),
+    .DATA(NO_AMMO_DATA),
+    .FONT_COLOR(NO_AMMO_COLOR)
+)
+ u_no_ammo_rect (
+    .clk,
+    .rst,
+
+
+    .char_line(char_line_no_ammo),
+    .char_pixels,
+    .char_code(char_code_no_ammo),
+
+    .hcount(in.hcount),
+    .vcount(in.vcount),
+    .delayed_hcount(delayed.hcount),
+    .delayed_vcount(delayed.vcount),
+    .rgb_in('0),
+    .rgb_out(no_ammo_rgb)
+
+);
+
 
 
 //sequential block
@@ -414,6 +452,10 @@ always_comb begin
         else if (delayed.hcount > DISCONNECTED_X && delayed.vcount > DISCONNECTED_Y && delayed.hcount < DISCONNECTED_X+(DISCONNECTED_SIZE_X*8) && delayed.vcount < DISCONNECTED_Y+(DISCONNECTED_SIZE_Y*16) && ~p2_connected) begin
             rgb_nxt = disconnected_rgb;
             addr = {char_code_disconnected, char_line_disconnected};
+        end
+        else if (delayed.hcount > NO_AMMO_X && delayed.vcount > NO_AMMO_Y && delayed.hcount < NO_AMMO_X+(NO_AMMO_SIZE_X*8) && delayed.vcount < NO_AMMO_Y+(NO_AMMO_SIZE_Y*16) && no_ammo) begin
+            rgb_nxt = no_ammo_rgb;
+            addr = {char_code_no_ammo, char_line_no_ammo};
         end
         else begin
             rgb_nxt = 12'h0_0_0;

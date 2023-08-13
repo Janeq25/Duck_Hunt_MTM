@@ -251,6 +251,7 @@ draw_overlay u_draw_overlay (
   .pause(sw[15] | no_ammo),
   .p2_connected(sw[14]),
   .looser(sw[13]),
+  .no_ammo,
 
   .in(draw_target_to_draw_overlay.in),
   .out(draw_overlay_to_out.out)
