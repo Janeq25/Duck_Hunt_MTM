@@ -13,7 +13,6 @@
     input logic rst,
     input logic new_frame,
     input logic duck_direction,
-    //input logic [4:0] reflections,
     input logic [4:0] duck_v_spd,
     input logic [4:0] duck_h_spd,
     input logic [9:0] duck_start_x,
@@ -30,8 +29,8 @@
 logic [5:0] frame_ctr;
 logic [5:0] frame_ctr_nxt;
 
-logic [10:0] duck_x_nxt;
-logic [10:0] duck_y_nxt;
+logic [9:0] duck_x_nxt;
+logic [9:0] duck_y_nxt;
 logic [10:0] expected_duck_x_nxt;
 logic [10:0] expected_duck_y_nxt;
 
@@ -45,9 +44,8 @@ enum logic [2:0]{
     DUCK_RIGHT_DOWN = 3'b010,
     DUCK_LEFT_UP = 3'b110,
     DUCK_LEFT_DOWN = 3'b111,
-    FLY_AWAY = 3'b101
-    //DUCK_HIT = 3'b100
-} state, state_nxt; //state_prev, current_state;
+    DUCK_HIT = 3'b101
+} state, state_nxt;
 
 always_ff @(posedge clk) begin : state_seq_blk
     if(rst) begin : state_seq_rst_blk
@@ -147,7 +145,7 @@ always_comb begin : state_comb_blk
                 state_nxt = DUCK_LEFT_DOWN;
             end 
         end
-        FLY_AWAY: begin 
+        DUCK_HIT: begin 
             //if(new_frame == 1) begin
                 state_nxt = STOP;
            // end
@@ -249,7 +247,7 @@ always_comb begin : out_comb_blk
             duck_show = 1'b1;
             duck_hit = 1'b0;
         end
-        FLY_AWAY: begin 
+        DUCK_HIT: begin 
             duck_x_nxt = '0; 
             duck_y_nxt = '0;
 
