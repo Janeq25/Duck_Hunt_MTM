@@ -20,8 +20,7 @@
     output logic [3:0] hex1
  );
 
-//local parameters
-localparam AMMO_QUANTITY = 16;
+ import vga_pkg::*;
 
 // internal signals
 logic shot_last, no_ammo_nxt;

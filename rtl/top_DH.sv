@@ -53,7 +53,7 @@ localparam H_SPEED = 10;
 
  // ctl_duck signals
    logic duck_direction;
-
+   logic direction;
    logic [4:0] vertical_speed;
    logic [9:0] duck_start_x_coordinate;
    logic [9:0] duck_x;
@@ -221,6 +221,7 @@ localparam H_SPEED = 10;
   .duck_show,
   .duck_x,
   .duck_y,
+  .duck_direction(direction),
 
   .in(draw_bg_to_draw_duck.in),
   .out(draw_duck_to_draw_crosshair.out)
@@ -269,7 +270,7 @@ draw_overlay u_draw_overlay (
   // ---ctrl section-----
 
  random_number_generator u_random_number_generator(
-   .clk(clk100MHz),
+   .clk,
    .rst,
 
    .direction(duck_direction),
@@ -281,6 +282,8 @@ draw_overlay u_draw_overlay (
   .clk,
   .rst,
   .new_frame,
+  .game_start(reload),
+  .hit,
   .duck_direction(duck_direction),
   .duck_v_spd(vertical_speed),
   .duck_h_spd(H_SPEED),
@@ -288,6 +291,7 @@ draw_overlay u_draw_overlay (
 
   .duck_show,
   .duck_hit,
+  .direction,
   .duck_x,
   .duck_y
  );
