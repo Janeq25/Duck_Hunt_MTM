@@ -12,6 +12,7 @@
  module ctl_score(
     input logic clk,
     input logic rst,
+    input logic duck_hit,
     input logic reset_score,
     input logic hit,
 
@@ -59,7 +60,7 @@ end
 //combinational logic
 
 always_comb begin
-    if (~hit_last && hit) begin : score_ctr_comb
+    if ((~hit_last && hit) && ~duck_hit) begin : score_ctr_comb
         score_ctr_nxt = score_ctr + 1;
     end
     else begin

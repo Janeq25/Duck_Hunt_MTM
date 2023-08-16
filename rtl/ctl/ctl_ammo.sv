@@ -12,6 +12,7 @@
  module ctl_ammo(
     input logic clk,
     input logic rst,
+    input logic duck_hit,
     input logic reset_score,
     input logic shot_fired,
     
@@ -20,8 +21,7 @@
     output logic [3:0] hex1
  );
 
-//local parameters
-localparam AMMO_QUANTITY = 16;
+ import vga_pkg::*;
 
 // internal signals
 logic shot_last, no_ammo_nxt;
@@ -64,7 +64,7 @@ end
 //combinational logic
 
 always_comb begin
-    if(~shot_last && shot_fired) begin : ammo_ctr_comb
+    if((~shot_last && shot_fired) && ~duck_hit) begin : ammo_ctr_comb
         ammo_ctr_nxt = ammo_ctr - 1;
     end
     else begin

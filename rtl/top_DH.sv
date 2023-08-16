@@ -274,6 +274,7 @@ draw_overlay u_draw_overlay (
   .new_frame,
   .game_start(test_btn),
   .hit,
+  .no_ammo,
   .duck_direction(duck_direction),
   .duck_v_spd(vertical_speed),
   .duck_h_spd(H_SPEED),
@@ -281,6 +282,7 @@ draw_overlay u_draw_overlay (
 
   .duck_show,
   .duck_hit,
+  .direction(),
   .duck_x,
   .duck_y
  );
@@ -288,6 +290,7 @@ draw_overlay u_draw_overlay (
  ctl_score u_ctl_score(
     .clk,
     .rst,
+    .duck_hit,
     .reset_score(test_btn),
     .hit,
 
@@ -298,6 +301,7 @@ draw_overlay u_draw_overlay (
 ctl_ammo u_ctl_ammo(
   .clk,
   .rst,
+  .duck_hit,
   .reset_score(test_btn),
   .shot_fired,
   
