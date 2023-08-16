@@ -189,7 +189,7 @@ always_comb begin : state_comb_blk
             end 
         end
         DUCK_HIT: begin 
-            if(no_ammo) begin
+            if(no_ammo && (duck_y_nxt > Y_POS_GRASS)) begin
                 state_nxt = IDLE;
             end
             else if(duck_y_nxt > Y_POS_GRASS) begin
