@@ -122,7 +122,7 @@ localparam H_SPEED = 10;
   debounce u_mouse_debounce(
     .clk,
     .reset(rst),
-    .sw(mouse_left_raw & ~(no_ammo)),
+    .sw(mouse_left_raw),
     .db_level(),
     .db_tick(mouse_left)
   );
@@ -153,7 +153,7 @@ localparam H_SPEED = 10;
   debounce u_gun_trigger_debounce(
     .clk,
     .reset(rst),
-    .sw(gun_trigger_raw & ~(no_ammo)),
+    .sw(gun_trigger_raw),
     .db_level(gun_trigger),
     .db_tick()
   );
@@ -170,6 +170,7 @@ localparam H_SPEED = 10;
     .clk,
     .rst,
     .new_frame,
+    .lock(no_ammo),
 
     .gun_is_connected,
     .gun_photodetector,
