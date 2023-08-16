@@ -15,6 +15,7 @@
 
     input logic duck_show,
     input logic duck_hit, //duck stops moving
+    input logic duck_direction,
 
     input logic [9:0] duck_x,
     input logic [9:0] duck_y,
@@ -39,7 +40,7 @@
 
  // signal assignments
     assign addr_top = 5'(in.vcount - duck_y);
-    assign addr_bottom = 6'(in.hcount - duck_x);
+    assign addr_bottom = duck_direction ? 6'(in.hcount - duck_x) : 6'h3f - 6'(in.hcount - duck_x);
 
 
  template_rom #(.ADDR_WIDTH(11), .DATA_WIDTH(12), .DATA_PATH("DH_duckA.dat")) u_duckA_rom(

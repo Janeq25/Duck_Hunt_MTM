@@ -53,7 +53,7 @@ localparam H_SPEED = 10;
 
  // ctl_duck signals
    logic duck_direction;
-
+   logic direction;
    logic [4:0] vertical_speed;
    logic [9:0] duck_start_x_coordinate;
    logic [9:0] duck_x;
@@ -213,6 +213,7 @@ localparam H_SPEED = 10;
   .duck_show,
   .duck_x,
   .duck_y,
+  .duck_direction(direction),
 
   .in(draw_bg_to_draw_duck.in),
   .out(draw_duck_to_draw_crosshair.out)
@@ -282,7 +283,7 @@ draw_overlay u_draw_overlay (
 
   .duck_show,
   .duck_hit,
-  .direction(),
+  .direction,
   .duck_x,
   .duck_y
  );
