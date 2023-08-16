@@ -4,7 +4,7 @@
 * Author: Jan Cichoń
 *
 * Description:
-*
+* Displays text_rects to the screen. Governs the connections to the font_rom between text_rects.
 */
 
 module draw_overlay(

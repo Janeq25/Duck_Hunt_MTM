@@ -51,6 +51,8 @@ set sv_files {
     ../rtl/ctl/ctl_duck.sv
     ../rtl/ctl/ctl_score.sv
     ../rtl/ctl/ctl_ammo.sv
+    ../rtl/ctl/ctl_reload.sv
+    ../rtl/ctl/ctl_pause.sv
     ../rtl/input/ctl_trigger.sv
     ../rtl/input/gun_conn_detector.sv
     ../rtl/input/mouse_hit_detector.sv

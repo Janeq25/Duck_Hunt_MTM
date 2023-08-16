@@ -4,7 +4,7 @@
  * Author: Jan Cichon
  *
  * Description:
- * Adds chars to the screen
+ * Calculates adress of char that needs to be displayed and pulls it from char_rect
  */
 
 
