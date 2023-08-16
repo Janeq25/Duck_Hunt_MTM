@@ -14,7 +14,6 @@
     input logic new_frame,
     input logic game_start,
     input logic hit,
-    input logic no_ammo,
     input logic duck_direction,
     input logic [4:0] duck_v_spd,
     input logic [4:0] duck_h_spd,
@@ -29,10 +28,11 @@
 
 //localparameters
 localparam X_POS_MAX = 1024;
-localparam Y_POS_MAX = 768;
+localparam Y_POS_MAX = 600;
 localparam Y_POS_GRASS = 600;
-localparam NOMINAL_V_SPD = 15;
-localparam FALLING_SPD = 8;
+localparam NOMINAL_V_SPD = 10;
+localparam MAX_V_SPD = 15;
+localparam FALLING_SPD = 6;
 
 //internal signals
 
@@ -189,10 +189,7 @@ always_comb begin : state_comb_blk
             end 
         end
         DUCK_HIT: begin 
-            if(no_ammo && (duck_y_nxt > Y_POS_GRASS)) begin
-                state_nxt = IDLE;
-            end
-            else if(duck_y_nxt > Y_POS_GRASS) begin
+            if(duck_y_nxt > Y_POS_GRASS) begin
                 state_nxt = DRAW;
             end
             else begin
@@ -219,6 +216,9 @@ always_comb begin : out_comb_blk
 
             if(duck_v_spd == 0) begin
                 duck_vertical_speed_nxt = NOMINAL_V_SPD;
+            end
+            else if (duck_v_spd > MAX_V_SPD) begin
+                duck_vertical_speed_nxt = duck_v_spd - duck_v_spd[3:0];
             end
             else begin
                 duck_vertical_speed_nxt = duck_v_spd;

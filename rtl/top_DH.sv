@@ -275,7 +275,6 @@ draw_overlay u_draw_overlay (
   .new_frame,
   .game_start(test_btn),
   .hit,
-  .no_ammo,
   .duck_direction(duck_direction),
   .duck_v_spd(vertical_speed),
   .duck_h_spd(H_SPEED),

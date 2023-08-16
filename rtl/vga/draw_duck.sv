@@ -93,10 +93,10 @@ always_comb begin
     if (duck_show && in.hcount > duck_x && in.vcount > duck_y && in.hcount < duck_x+DUCK_WIDTH && in.vcount < duck_y+DUCK_HEIGHT) begin
 
         if(frame_ctr < 8 && ~duck_hit) begin
-            rgb_nxt = rom_duckA == 12'hf_0_0 ? in.rgb : rom_duckA;
+            rgb_nxt = rom_duckB == 12'hf_0_0 ? in.rgb : rom_duckB;
         end
         else begin
-            rgb_nxt = rom_duckB == 12'hf_0_0 ? in.rgb : rom_duckB;
+            rgb_nxt = rom_duckA == 12'hf_0_0 ? in.rgb : rom_duckA;
         end
     end
     else begin
