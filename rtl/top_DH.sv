@@ -12,7 +12,7 @@
     input logic clk100MHz, //mouse clock 100MHz
     input logic rst,
 
-    input logic test_btn,
+    input logic reload_btn,
 
     output logic vs,
     output logic hs,
@@ -81,17 +81,24 @@ localparam H_SPEED = 10;
    logic [3:0] digit_3, digit_2, digit_1, digit_0;
    logic no_ammo;
 
+  // control signals
+   logic pause;
+   logic reload;
+   logic player2_connected;
+
+
  // signal assignments
  assign vs = draw_overlay_to_out.vsync;
  assign hs = draw_overlay_to_out.hsync;
  assign {r,g,b} = draw_overlay_to_out.rgb;
 
 
- assign led[15:4] = '0;
+ assign led[11:4] = '0;
  assign led[0] = gun_trigger;
  assign led[1] = gun_photodetector;
  assign led[2] = gun_is_connected;
  assign led[3] = no_ammo;
+ assign led[15] = 1'b0;
 
  
  // modules
@@ -170,7 +177,7 @@ localparam H_SPEED = 10;
     .clk,
     .rst,
     .new_frame,
-    .lock(no_ammo),
+    .lock(pause),
 
     .gun_is_connected,
     .gun_photodetector,
@@ -249,9 +256,9 @@ draw_overlay u_draw_overlay (
   .clk,
   .rst,
 
-  .pause(sw[15] | no_ammo),
-  .p2_connected(sw[14]),
-  .looser(sw[13]),
+  .pause,
+  .player2_connected,
+  .looser(sw[14]),
   .no_ammo,
 
   .in(draw_target_to_draw_overlay.in),
@@ -288,7 +295,7 @@ draw_overlay u_draw_overlay (
  ctl_score u_ctl_score(
     .clk,
     .rst,
-    .reset_score(test_btn),
+    .reset_score(reload),
     .hit,
 
     .hex2(digit_2),
@@ -298,13 +305,38 @@ draw_overlay u_draw_overlay (
 ctl_ammo u_ctl_ammo(
   .clk,
   .rst,
-  .reset_score(test_btn),
+  .reset_score(reload),
   .shot_fired,
   
   .no_ammo,
   .hex0(digit_0),
   .hex1(digit_1)
 );
+
+ ctl_pause u_ctl_pause(
+  .clk,
+  .rst,
+
+  .player2_pause(sw[13]),
+  .player1_pause(led[13]),
+
+  .sw_pause_raw(sw[15]),
+  .no_ammo,
+  .pause
+ );
+
+ ctl_reload u_ctl_reload(
+  .clk,
+  .rst,
+
+  .player1_reload(led[12]),
+  .player2_reload(sw[12]),
+
+  .btn_reload_raw(reload_btn),
+  .player2_connected,
+  .reload
+
+ );
 
  // -----------------
 

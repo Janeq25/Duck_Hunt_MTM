@@ -12,7 +12,7 @@ module draw_overlay(
     input logic rst,
 
     input logic pause,
-    input logic p2_connected,
+    input logic player2_connected,
     input logic looser,
     input logic no_ammo,
 
@@ -445,11 +445,11 @@ always_comb begin
             rgb_nxt = player2_rgb;
             addr = {char_code_player2, char_line_player2};
         end
-        else if (delayed.hcount > CONNECTED_X && delayed.vcount > CONNECTED_Y && delayed.hcount < CONNECTED_X+(CONNECTED_SIZE_X*8) && delayed.vcount < CONNECTED_Y+(CONNECTED_SIZE_Y*16) && p2_connected) begin
+        else if (delayed.hcount > CONNECTED_X && delayed.vcount > CONNECTED_Y && delayed.hcount < CONNECTED_X+(CONNECTED_SIZE_X*8) && delayed.vcount < CONNECTED_Y+(CONNECTED_SIZE_Y*16) && player2_connected) begin
             rgb_nxt = connected_rgb;
             addr = {char_code_connected, char_line_connected};
         end
-        else if (delayed.hcount > DISCONNECTED_X && delayed.vcount > DISCONNECTED_Y && delayed.hcount < DISCONNECTED_X+(DISCONNECTED_SIZE_X*8) && delayed.vcount < DISCONNECTED_Y+(DISCONNECTED_SIZE_Y*16) && ~p2_connected) begin
+        else if (delayed.hcount > DISCONNECTED_X && delayed.vcount > DISCONNECTED_Y && delayed.hcount < DISCONNECTED_X+(DISCONNECTED_SIZE_X*8) && delayed.vcount < DISCONNECTED_Y+(DISCONNECTED_SIZE_Y*16) && ~player2_connected) begin
             rgb_nxt = disconnected_rgb;
             addr = {char_code_disconnected, char_line_disconnected};
         end

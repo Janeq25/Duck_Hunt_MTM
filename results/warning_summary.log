@@ -1,6 +1,6 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-08-16 16:54:28
+Created: 2023-08-16 17:12:16
 
 ----SYNTHESIS----
 WARNING: [Synth 8-9661] initial value of parameter 'TARGET_WIDTH' is omitted [rtl/input/mouse_hit_detector.sv:10]
@@ -52,7 +52,7 @@ WARNING: [Synth 8-7129] Port out\.rgb[3] in module vga_timing is either unconnec
 WARNING: [Synth 8-7129] Port out\.rgb[2] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[1] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[0] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port sw[12] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port led[14] in module top_DH is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[11] in module top_DH is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[10] in module top_DH is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[9] in module top_DH is either unconnected or has no load
@@ -98,7 +98,7 @@ WARNING: [Synth 8-7129] Port out\.rgb[3] in module vga_timing is either unconnec
 WARNING: [Synth 8-7129] Port out\.rgb[2] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[1] in module vga_timing is either unconnected or has no load
 WARNING: [Synth 8-7129] Port out\.rgb[0] in module vga_timing is either unconnected or has no load
-WARNING: [Synth 8-7129] Port sw[12] in module top_DH is either unconnected or has no load
+WARNING: [Synth 8-7129] Port led[14] in module top_DH is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[11] in module top_DH is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[10] in module top_DH is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[9] in module top_DH is either unconnected or has no load
