@@ -260,7 +260,7 @@ draw_overlay u_draw_overlay (
   // ---ctrl section-----
 
  random_number_generator u_random_number_generator(
-   .clk(clk100MHz),
+   .clk,
    .rst,
 
    .direction(duck_direction),
@@ -272,6 +272,7 @@ draw_overlay u_draw_overlay (
   .clk,
   .rst,
   .new_frame,
+  .game_start(test_btn),
   .duck_direction(duck_direction),
   .duck_v_spd(vertical_speed),
   .duck_h_spd(H_SPEED),
