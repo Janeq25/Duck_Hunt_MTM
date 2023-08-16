@@ -1,5 +1,6 @@
 // The module delays the input data 'din' by the number of clock cycles
 // set by CLK_DEL input parameter
+// Modification by Jan Cichon <- removed asynchronous reset
 module delay
     #( parameter
         WIDTH   = 8, // bit width of the input/output data
@@ -18,7 +19,7 @@ module delay
 
 //------------------------------------------------------------------------------
 // The first delay stage
-    always @(posedge clk or posedge rst)
+    always @(posedge clk)
     begin:delay_stage_0
         if(rst)
             del_mem[0] <= 0;
@@ -35,7 +36,7 @@ module delay
         for (i = 1; i < CLK_DEL ; i = i + 1 )
         begin:delay_stage
 
-            always @(posedge clk or posedge rst)
+            always @(posedge clk)
             begin
                 if(rst)
                     del_mem[i] <= 0;
