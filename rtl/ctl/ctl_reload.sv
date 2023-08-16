@@ -41,7 +41,7 @@ end
 
 assign player2_reload_pulse = player2_reload_last && ~player2_reload;
 
-//sequential block
+// submodules
 
 debounce u_btn_reload_debounce(
     .clk,
@@ -50,6 +50,9 @@ debounce u_btn_reload_debounce(
     .db_level(btn_reload),
     .db_tick()
 );
+
+//sequential block
+
 
 always_ff @(posedge clk) begin
     if (rst) begin
