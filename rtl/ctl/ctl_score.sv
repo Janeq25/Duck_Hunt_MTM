@@ -16,15 +16,16 @@
     input logic hit,
 
     output logic [3:0] hex2,
-    output logic [3:0] hex3
+    output logic [3:0] hex3,
+    output logic [3:0] score_ctr
  );
 
 // internal signals
 logic hit_last;
 logic [3:0] hex2_nxt;
 logic [3:0] hex3_nxt;
-logic [6:0] score_ctr;
-logic [6:0] score_ctr_nxt;
+
+logic [3:0] score_ctr_nxt;
 
 // sequential logic
 always_ff @(posedge clk) begin : edge_detection

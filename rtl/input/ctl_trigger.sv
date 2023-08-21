@@ -40,11 +40,12 @@
     logic shot_fired_delayed_nxt;
     logic trigger_delayed;
     logic gun_trigger_delayed;
+    logic lock_delayed;
 
 
 
  // signal assignments
-    assign trigger = gun_is_connected ? (~gun_trigger & ~lock) : (mouse_left & ~lock);
+    assign trigger = gun_is_connected ? (~gun_trigger & ~lock_delayed) : (mouse_left & ~lock_delayed);
     assign shot_fired_nxt = ~trigger && trigger_last; // signals sent to other modules (slightly before reading if shot connected to give time for controller to set)
 
 
@@ -57,7 +58,14 @@
         .dout(gun_trigger_delayed)
     );
 
-    assign trigger_delayed = gun_is_connected ? (~gun_trigger_delayed & ~lock): (mouse_left & ~lock);
+    delay #(.CLK_DEL(11), .WIDTH(1)) lock_delay (
+        .clk(new_frame),
+        .rst,
+        .din(lock),
+        .dout(lock_delayed)
+    );
+
+    assign trigger_delayed = gun_is_connected ? (~gun_trigger_delayed & ~lock_delayed): (mouse_left & ~lock_delayed);
     assign shot_fired_delayed_nxt = ~trigger_delayed && trigger_delayed_last; // delayed internal signals
 
  // sequential logic

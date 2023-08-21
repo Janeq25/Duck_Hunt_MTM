@@ -32,6 +32,6 @@ localparam V_S_END = V_S_START + 6;
 localparam V_B_END = V_B_START + 38;
 
 // Parameters for game settings
-localparam AMMO_QUANTITY = 16; //max 16
+localparam AMMO_QUANTITY = 15;
 
 endpackage

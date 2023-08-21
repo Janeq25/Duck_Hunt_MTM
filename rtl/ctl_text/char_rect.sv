@@ -10,7 +10,7 @@
 module char_rect #(
     parameter SIZE_X=4,
     parameter SIZE_Y=4,
-    parameter DATA= "abcdefghijklmnop"
+    parameter DATA= ""
 )
     (
     input logic clk,

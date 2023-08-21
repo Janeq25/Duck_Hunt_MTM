@@ -17,7 +17,8 @@
     
     output logic no_ammo,
     output logic [3:0] hex0,
-    output logic [3:0] hex1
+    output logic [3:0] hex1,
+    output logic [3:0] ammo_ctr
  );
 
  import vga_pkg::*;
@@ -25,8 +26,7 @@
 // internal signals
 logic shot_last, no_ammo_nxt;
 logic [3:0] hex0_nxt, hex1_nxt;
-logic [6:0] ammo_ctr;
-logic [6:0] ammo_ctr_nxt;
+logic [3:0] ammo_ctr_nxt;
 
 // sequential logic
 always_ff @(posedge clk) begin : edge_detection

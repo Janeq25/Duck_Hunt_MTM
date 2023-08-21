@@ -85,6 +85,10 @@ localparam H_SPEED = 10;
    logic pause;
    logic reload;
    logic player2_connected;
+  
+  // multiplayer signals
+   logic [3:0] score_ctr;
+   logic [3:0] ammo_ctr;
 
 
  // signal assignments
@@ -93,7 +97,8 @@ localparam H_SPEED = 10;
  assign {r,g,b} = draw_overlay_to_out.rgb;
 
 
- assign led[11:4] = '0;
+ assign led[8:4] = '0;
+ assign led[12:9] = score_ctr;
  assign led[0] = gun_trigger;
  assign led[1] = gun_photodetector;
  assign led[2] = gun_is_connected;
@@ -259,8 +264,9 @@ draw_overlay u_draw_overlay (
 
   .pause,
   .player2_connected,
-  .looser(sw[14]),
   .no_ammo,
+  .score_p1(score_ctr),
+  .score_p2(sw[12:9]),
 
   .in(draw_target_to_draw_overlay.in),
   .out(draw_overlay_to_out.out)
@@ -303,7 +309,8 @@ draw_overlay u_draw_overlay (
     .hit,
 
     .hex2(digit_2),
-    .hex3(digit_3)
+    .hex3(digit_3),
+    .score_ctr
 );
 
 ctl_ammo u_ctl_ammo(
@@ -314,15 +321,16 @@ ctl_ammo u_ctl_ammo(
   
   .no_ammo,
   .hex0(digit_0),
-  .hex1(digit_1)
+  .hex1(digit_1),
+  .ammo_ctr
 );
 
  ctl_pause u_ctl_pause(
   .clk,
   .rst,
 
-  .player2_pause(sw[13]),
-  .player1_pause(led[13]),
+  .player2_pause(sw[14]),
+  .player1_pause(led[14]),
 
   .sw_pause_raw(sw[15]),
   .no_ammo,
@@ -333,8 +341,8 @@ ctl_ammo u_ctl_ammo(
   .clk,
   .rst,
 
-  .player1_reload(led[12]),
-  .player2_reload(sw[12]),
+  .player1_reload(led[13]),
+  .player2_reload(sw[13]),
 
   .btn_reload_raw(reload_btn),
   .player2_connected,

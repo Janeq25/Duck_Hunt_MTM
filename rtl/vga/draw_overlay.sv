@@ -13,13 +13,17 @@ module draw_overlay(
 
     input logic pause,
     input logic player2_connected,
-    input logic looser,
     input logic no_ammo,
+
+    input logic [3:0] score_p1,
+    input logic [3:0] score_p2,
 
     itf_vga.in in,
     itf_vga.out out
 
 );
+
+
 
 //params
 localparam DUCK_HEIGHT = 48;
@@ -30,8 +34,21 @@ localparam SCREEN_HEIGHT = 768;
 localparam HELP_X = 0;
 localparam HELP_Y = 0;
 localparam HELP_SIZE_X = 20;
-localparam HELP_SIZE_Y = 12;
-localparam HELP_DATA = {" connections help:  ",
+localparam HELP_SIZE_Y = 25;
+localparam HELP_DATA = {" Aim for the ducks  ",
+                        " using mouse or gun.",
+                        "                    ",
+                        " Your score and ammo",
+                        " (in that order)    ",
+                        " are shown on boards",
+                        " display.           ",
+                        "                    ",
+                        " Can you hit all    ",
+                        " your bullets?      ",
+                        "                    ",
+                        " Good Luck!         ",
+                        "                    ",
+                        " wiring diagram:    ",
                         " gun connection:    ",
                         " br bl wb wg x  x JA",
                         " x  x  x  x  x  x   ",
@@ -53,45 +70,71 @@ localparam PAUSE_DATA = " PAUSED ";
 localparam PAUSE_COLOR = 12'h7_7_7;
 
 localparam WINNER_X = SCREEN_WIDTH/2;
-localparam WINNER_Y = 150;
-localparam WINNER_SIZE_X = 8;
+localparam WINNER_Y = 130;
+localparam WINNER_SIZE_X = 9;
 localparam WINNER_SIZE_Y = 1;
-localparam WINNER_DATA = " WINNER ";
+localparam WINNER_DATA = " WINNER! ";
 localparam WINNER_COLOR = 12'h0_f_0;
 
-localparam LOOSER_X = SCREEN_WIDTH/2;
-localparam LOOSER_Y = 150;
-localparam LOOSER_SIZE_X = 8;
+localparam LOOSER_X = (SCREEN_WIDTH/2) - 20;
+localparam LOOSER_Y = 130;
+localparam LOOSER_SIZE_X = 14;
 localparam LOOSER_SIZE_Y = 1;
-localparam LOOSER_DATA = " LOOSER ";
+localparam LOOSER_DATA = " TRY AGAIN :) ";
 localparam LOOSER_COLOR = 12'hf_0_0;
 
 localparam PLAYER2_X = 800;
-localparam PLAYER2_Y = 400;
+localparam PLAYER2_Y = 500;
 localparam PLAYER2_SIZE_X = 9;
 localparam PLAYER2_SIZE_Y = 1;
 localparam PLAYER2_DATA = " PLAYER2 ";
 localparam PLAYER2_COLOR = 12'h7_7_7;
 
 localparam CONNECTED_X = 800;
-localparam CONNECTED_Y = 450;
+localparam CONNECTED_Y = 520;
 localparam CONNECTED_SIZE_X = 11;
 localparam CONNECTED_SIZE_Y = 1;
 localparam CONNECTED_DATA = " CONNECTED ";
 localparam CONNECTED_COLOR = 12'hf_0_f;
 
 localparam DISCONNECTED_X = 800;
-localparam DISCONNECTED_Y = 450;
+localparam DISCONNECTED_Y = 520;
 localparam DISCONNECTED_SIZE_X = 14;
 localparam DISCONNECTED_SIZE_Y = 1;
 localparam DISCONNECTED_DATA = " DISCONNECTED ";
 localparam DISCONNECTED_COLOR = 12'h0_f_f;
 
+localparam PLAYER1_SCORE_X = 800;
+localparam PLAYER1_SCORE_Y = 300;
+localparam PLAYER1_SCORE_SIZE_X = 14;
+localparam PLAYER1_SCORE_SIZE_Y = 1;
+localparam PLAYER1_SCORE_DATA = " PLAYER1 SCORE ";
+localparam PLAYER1_SCORE_COLOR = 12'h7_7_7;
+
+localparam PLAYER1_SCORE_NUMBER_X = 800;
+localparam PLAYER1_SCORE_NUMBER_Y = 320;
+localparam PLAYER1_SCORE_NUMBER_SIZE_X = 3;
+localparam PLAYER1_SCORE_NUMBER_COLOR = 12'hf_f_0;
+
+localparam PLAYER2_SCORE_X = 800;
+localparam PLAYER2_SCORE_Y = 400;
+localparam PLAYER2_SCORE_SIZE_X = 14;
+localparam PLAYER2_SCORE_SIZE_Y = 1;
+localparam PLAYER2_SCORE_DATA = " PLAYER2 SCORE ";
+localparam PLAYER2_SCORE_COLOR = 12'h7_7_7;
+
+localparam PLAYER2_SCORE_NUMBER_X = 800;
+localparam PLAYER2_SCORE_NUMBER_Y = 420;
+localparam PLAYER2_SCORE_NUMBER_SIZE_X = 3;
+localparam PLAYER2_SCORE_NUMBER_COLOR = 12'hf_f_0;
+
+
 localparam SW15_X = 0;
 localparam SW15_Y = 700;
-localparam SW15_SIZE_X = 15;
-localparam SW15_SIZE_Y = 1;
-localparam SW15_DATA = " SW15 for HELP ";
+localparam SW15_SIZE_X = 21;
+localparam SW15_SIZE_Y = 2;
+localparam SW15_DATA = {" SW15 for HELP       ",
+                        " MIDDLE BTN to START "};
 localparam SW15_COLOR = 12'hf_0_0;
 
 localparam NO_AMMO_X = 0;
@@ -113,6 +156,10 @@ logic [11:0] connected_rgb;
 logic [11:0] disconnected_rgb;
 logic [11:0] sw15_rgb;
 logic [11:0] no_ammo_rgb;
+logic [11:0] player1_score_rgb;
+logic [11:0] player2_score_rgb;
+logic [11:0] player1_score_number_rgb;
+logic [11:0] player2_score_number_rgb;
 
 
 logic [6:0] char_code_help;
@@ -133,10 +180,28 @@ logic [6:0] char_code_sw15;
 logic [3:0] char_line_sw15;
 logic [6:0] char_code_no_ammo;
 logic [3:0] char_line_no_ammo;
+logic [6:0] char_code_player1_score;
+logic [3:0] char_line_player1_score;
+logic [6:0] char_code_player2_score;
+logic [3:0] char_line_player2_score;
+logic [3:0] char_line_player1_score_number;
+logic [6:0] char_code_player1_score_number;
+logic [6:0] char_code_player2_score_number;
+logic [3:0] char_line_player2_score_number;
+
 
 logic [10:0] addr;
 logic [7:0] char_pixels;
 
+logic looser;
+always_comb begin
+    if (player2_connected) begin
+        looser = (score_p1 < score_p2);
+    end
+    else begin
+        looser = (score_p1 < 15);
+    end
+end
 
 
 //interfaces
@@ -322,7 +387,7 @@ draw_char_rect #(
     .DATA(DISCONNECTED_DATA),
     .FONT_COLOR(DISCONNECTED_COLOR)
 )
- u_dieconnected_rect (
+ u_disconnected_rect (
     .clk,
     .rst,
 
@@ -337,6 +402,108 @@ draw_char_rect #(
     .delayed_vcount(delayed.vcount),
     .rgb_in('0),
     .rgb_out(disconnected_rgb)
+
+);
+
+draw_char_ram #(
+    .RECT_X(PLAYER1_SCORE_NUMBER_X),
+    .RECT_Y(PLAYER1_SCORE_NUMBER_Y),
+    .SIZE_X(PLAYER1_SCORE_NUMBER_SIZE_X),
+    .FONT_COLOR(PLAYER1_SCORE_NUMBER_COLOR)
+)
+ u_player1_score_number_rect (
+    .clk,
+    .rst,
+
+    .char_line(char_line_player1_score_number),
+    .char_pixels,
+    .char_code(char_code_player1_score_number),
+
+    .chars({8'(8'h30 + score_p1%10), 8'(8'h30 + score_p1/10), " "}),
+
+    .hcount(in.hcount),
+    .vcount(in.vcount),
+    .delayed_hcount(delayed.hcount),
+    .delayed_vcount(delayed.vcount),
+    .rgb_in('0),
+    .rgb_out(player1_score_number_rgb)
+
+);
+
+draw_char_rect #(
+    .RECT_X(PLAYER1_SCORE_X),
+    .RECT_Y(PLAYER1_SCORE_Y),
+    .SIZE_X(PLAYER1_SCORE_SIZE_X),
+    .SIZE_Y(PLAYER1_SCORE_SIZE_Y),
+    .DATA(PLAYER1_SCORE_DATA),
+    .FONT_COLOR(PLAYER1_SCORE_COLOR)
+)
+ u_player1_score_rect (
+    .clk,
+    .rst,
+
+
+    .char_line(char_line_player1_score),
+    .char_pixels,
+    .char_code(char_code_player1_score),
+
+    .hcount(in.hcount),
+    .vcount(in.vcount),
+    .delayed_hcount(delayed.hcount),
+    .delayed_vcount(delayed.vcount),
+    .rgb_in('0),
+    .rgb_out(player1_score_rgb)
+
+);
+
+draw_char_ram #(
+    .RECT_X(PLAYER2_SCORE_NUMBER_X),
+    .RECT_Y(PLAYER2_SCORE_NUMBER_Y),
+    .SIZE_X(PLAYER2_SCORE_NUMBER_SIZE_X),
+    .FONT_COLOR(PLAYER2_SCORE_NUMBER_COLOR)
+)
+ u_player2_score_number_rect (
+    .clk,
+    .rst,
+
+    .char_line(char_line_player2_score_number),
+    .char_pixels,
+    .char_code(char_code_player2_score_number),
+
+    .chars({8'(8'h30 + score_p2%10), 8'(8'h30 + score_p2/10), " "}),
+
+    .hcount(in.hcount),
+    .vcount(in.vcount),
+    .delayed_hcount(delayed.hcount),
+    .delayed_vcount(delayed.vcount),
+    .rgb_in('0),
+    .rgb_out(player2_score_number_rgb)
+
+);
+
+draw_char_rect #(
+    .RECT_X(PLAYER2_SCORE_X),
+    .RECT_Y(PLAYER2_SCORE_Y),
+    .SIZE_X(PLAYER2_SCORE_SIZE_X),
+    .SIZE_Y(PLAYER2_SCORE_SIZE_Y),
+    .DATA(PLAYER2_SCORE_DATA),
+    .FONT_COLOR(PLAYER2_SCORE_COLOR)
+)
+ u_player2_score_rect (
+    .clk,
+    .rst,
+
+
+    .char_line(char_line_player2_score),
+    .char_pixels,
+    .char_code(char_code_player2_score),
+
+    .hcount(in.hcount),
+    .vcount(in.vcount),
+    .delayed_hcount(delayed.hcount),
+    .delayed_vcount(delayed.vcount),
+    .rgb_in('0),
+    .rgb_out(player2_score_rgb)
 
 );
 
@@ -433,11 +600,11 @@ always_comb begin
             rgb_nxt = pause_rgb;
             addr = {char_code_pause, char_line_pause};
         end
-        else if (delayed.hcount > WINNER_X && delayed.vcount > WINNER_Y && delayed.hcount < WINNER_X+(WINNER_SIZE_X*8) && delayed.vcount < WINNER_Y+(WINNER_SIZE_Y*16) && ~looser) begin
+        else if (delayed.hcount > WINNER_X && delayed.vcount > WINNER_Y && delayed.hcount < WINNER_X+(WINNER_SIZE_X*8) && delayed.vcount < WINNER_Y+(WINNER_SIZE_Y*16) && ~looser && no_ammo) begin
             rgb_nxt = winner_rgb;
             addr = {char_code_winner, char_line_winner};
         end
-        else if (delayed.hcount > WINNER_X && delayed.vcount > WINNER_Y && delayed.hcount < WINNER_X+(WINNER_SIZE_X*8) && delayed.vcount < WINNER_Y+(WINNER_SIZE_Y*16) && looser) begin
+        else if (delayed.hcount > LOOSER_X && delayed.vcount > LOOSER_Y && delayed.hcount < LOOSER_X+(LOOSER_SIZE_X*8) && delayed.vcount < LOOSER_Y+(LOOSER_SIZE_Y*16) && looser && no_ammo) begin
             rgb_nxt = looser_rgb;
             addr = {char_code_looser, char_line_looser};
         end
@@ -452,6 +619,22 @@ always_comb begin
         else if (delayed.hcount > DISCONNECTED_X && delayed.vcount > DISCONNECTED_Y && delayed.hcount < DISCONNECTED_X+(DISCONNECTED_SIZE_X*8) && delayed.vcount < DISCONNECTED_Y+(DISCONNECTED_SIZE_Y*16) && ~player2_connected) begin
             rgb_nxt = disconnected_rgb;
             addr = {char_code_disconnected, char_line_disconnected};
+        end
+        else if (delayed.hcount > PLAYER1_SCORE_X && delayed.vcount > PLAYER1_SCORE_Y && delayed.hcount < PLAYER1_SCORE_X+(PLAYER1_SCORE_SIZE_X*8) && delayed.vcount < PLAYER1_SCORE_Y+(PLAYER1_SCORE_SIZE_Y*16)) begin
+            rgb_nxt = player1_score_rgb;
+            addr = {char_code_player1_score, char_line_player1_score};
+        end
+        else if (delayed.hcount > PLAYER1_SCORE_NUMBER_X && delayed.vcount > PLAYER1_SCORE_NUMBER_Y && delayed.hcount < PLAYER1_SCORE_NUMBER_X+(PLAYER1_SCORE_NUMBER_SIZE_X*8) && delayed.vcount < PLAYER1_SCORE_NUMBER_Y+16) begin
+            rgb_nxt = player1_score_number_rgb;
+            addr = {char_code_player1_score_number, char_line_player1_score_number};
+        end
+        else if (delayed.hcount > PLAYER2_SCORE_X && delayed.vcount > PLAYER2_SCORE_Y && delayed.hcount < PLAYER2_SCORE_X+(PLAYER2_SCORE_SIZE_X*8) && delayed.vcount < PLAYER2_SCORE_Y+(PLAYER2_SCORE_SIZE_Y*16)) begin
+            rgb_nxt = player2_score_rgb;
+            addr = {char_code_player2_score, char_line_player2_score};
+        end
+        else if (delayed.hcount > PLAYER2_SCORE_NUMBER_X && delayed.vcount > PLAYER2_SCORE_NUMBER_Y && delayed.hcount < PLAYER2_SCORE_NUMBER_X+(PLAYER2_SCORE_NUMBER_SIZE_X*8) && delayed.vcount < PLAYER2_SCORE_NUMBER_Y+16) begin
+            rgb_nxt = player2_score_number_rgb;
+            addr = {char_code_player2_score_number, char_line_player2_score_number};
         end
         else if (delayed.hcount > NO_AMMO_X && delayed.vcount > NO_AMMO_Y && delayed.hcount < NO_AMMO_X+(NO_AMMO_SIZE_X*8) && delayed.vcount < NO_AMMO_Y+(NO_AMMO_SIZE_Y*16) && no_ammo) begin
             rgb_nxt = no_ammo_rgb;

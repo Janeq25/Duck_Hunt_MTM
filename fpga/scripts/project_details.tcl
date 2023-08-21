@@ -46,6 +46,7 @@ set sv_files {
     ../rtl/vga/draw_overlay.sv
     ../rtl/ctl_text/char_rect.sv
     ../rtl/ctl_text/draw_char_rect.sv
+    ../rtl/ctl_text/draw_char_ram.sv
     ../rtl/rng/flip_flop.sv
     ../rtl/rng/random_number_generator.sv
     ../rtl/ctl/ctl_duck.sv
