@@ -23,14 +23,22 @@
     output logic [6:0] seg,
     output logic dp,
 
-    output logic [15:0] led,
-    input logic [15:0] sw,
+    output logic [14:0] led,
+    input logic sw_pause_raw,
 
     inout logic ps2_clk,
     inout logic ps2_data,
 
     input logic gun_trigger_raw,
-    input logic gun_photodetector_raw
+    input logic gun_photodetector_raw,
+
+    output logic player1_reload,
+    output logic player1_pause,
+    output logic [3:0] player1_score,
+    input logic player2_reload_raw,
+    input logic player2_pause_raw,
+    input logic [3:0] player2_score_raw
+
 
  );
 
@@ -89,6 +97,9 @@ localparam H_SPEED = 10;
   // multiplayer signals
    logic [3:0] score_ctr;
    logic [3:0] ammo_ctr;
+   logic player2_pause;
+   logic player2_reload;
+   logic [3:0] player2_score;
 
 
  // signal assignments
@@ -97,18 +108,62 @@ localparam H_SPEED = 10;
  assign {r,g,b} = draw_overlay_to_out.rgb;
 
 
- assign led[8:4] = '0;
- assign led[12:9] = score_ctr;
- assign led[0] = gun_trigger;
- assign led[1] = gun_photodetector;
- assign led[2] = gun_is_connected;
- assign led[3] = no_ammo;
- assign led[15] = 1'b0;
-
+ assign led = {ammo_ctr>14,ammo_ctr>13,ammo_ctr>12,ammo_ctr>11,ammo_ctr>10,ammo_ctr>9,ammo_ctr>8,ammo_ctr>7,ammo_ctr>6,ammo_ctr>5,ammo_ctr>4,ammo_ctr>3,ammo_ctr>2,ammo_ctr>1,ammo_ctr>0};
+ assign player1_score = score_ctr;
  
  // modules
 
  // --- input section ---
+
+ // --- multiplayer debounce ---
+
+ debounce u_player2_pause (
+  .clk,
+  .reset(rst),
+  .sw(player2_pause_raw),
+  .db_level(player2_pause),
+  .db_tick()
+ );
+
+ debounce u_player2_reload (
+  .clk,
+  .reset(rst),
+  .sw(player2_reload_raw),
+  .db_level(player2_reload),
+  .db_tick()
+ );
+
+ debounce u_player2_score0 (
+  .clk,
+  .reset(rst),
+  .sw(player2_score_raw[0]),
+  .db_level(player2_score[0]),
+  .db_tick()
+ );
+ 
+ debounce u_player2_score1 (
+  .clk,
+  .reset(rst),
+  .sw(player2_score_raw[1]),
+  .db_level(player2_score[1]),
+  .db_tick()
+ );
+
+ debounce u_player2_score2 (
+  .clk,
+  .reset(rst),
+  .sw(player2_score_raw[2]),
+  .db_level(player2_score[2]),
+  .db_tick()
+ );
+
+ debounce u_player2_score3 (
+  .clk,
+  .reset(rst),
+  .sw(player2_score_raw[3]),
+  .db_level(player2_score[3]),
+  .db_tick()
+ );
 
  MouseCtl u_MouseCtl (
     .clk(clk),
@@ -265,8 +320,8 @@ draw_overlay u_draw_overlay (
   .pause,
   .player2_connected,
   .no_ammo,
-  .score_p1(score_ctr),
-  .score_p2(sw[12:9]),
+  .score_p1(player1_score),
+  .score_p2(player2_score),
 
   .in(draw_target_to_draw_overlay.in),
   .out(draw_overlay_to_out.out)
@@ -329,10 +384,10 @@ ctl_ammo u_ctl_ammo(
   .clk,
   .rst,
 
-  .player2_pause(sw[14]),
-  .player1_pause(led[14]),
+  .player2_pause,
+  .player1_pause,
 
-  .sw_pause_raw(sw[15]),
+  .sw_pause_raw,
   .no_ammo,
   .pause
  );
@@ -341,8 +396,8 @@ ctl_ammo u_ctl_ammo(
   .clk,
   .rst,
 
-  .player1_reload(led[13]),
-  .player2_reload(sw[13]),
+  .player1_reload,
+  .player2_reload,
 
   .btn_reload_raw(reload_btn),
   .player2_connected,

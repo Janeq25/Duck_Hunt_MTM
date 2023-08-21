@@ -9,8 +9,8 @@
 
 module top_DH_basys3 ( //connections order the same as in constraints file
     input logic clk,
-    input logic [15:0] sw,
-    output logic [15:0] led,
+    input logic sw,
+    output logic [14:0] led,
     output logic [6:0] seg,
     output logic dp,
     output logic [3:0] an,
@@ -24,8 +24,13 @@ module top_DH_basys3 ( //connections order the same as in constraints file
     output wire [3:0] vgaBlue,
     inout logic PS2Clk,
     inout logic PS2Data,
-    input wire JA2, //trigger
-    input wire JA3 //photodetector
+    input wire JA4, //trigger
+    input wire JA3, //photodetector
+
+    output logic [5:0] JB,
+    input logic [3:0] JC,
+    input logic JC9,
+    input logic JC10
 
 );
 
@@ -66,10 +71,17 @@ module top_DH_basys3 ( //connections order the same as in constraints file
     .ps2_clk(PS2Clk),
     .ps2_data(PS2Data),
 
-    .gun_trigger_raw(JA3),
-    .gun_photodetector_raw(JA2),
+    .gun_trigger_raw(JA4),
+    .gun_photodetector_raw(JA3),
 
-    .sw
+    .sw_pause_raw(sw),
+
+    .player1_pause(JB[4]),
+    .player1_reload(JB[5]),
+    .player1_score(JB[3:0]),
+    .player2_pause_raw(JC10),
+    .player2_reload_raw(JC9),
+    .player2_score_raw({JC[0], JC[1], JC[2], JC[3]})
  );
 
 

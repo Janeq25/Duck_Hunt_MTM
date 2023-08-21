@@ -4,7 +4,7 @@
  * Author: Jan Cichon
  *
  * Description:
- * Calculates adress of char that needs to be displayed and pulls it from char_rect
+ * Calculates codes of characters given as input in "chars". Used for dynamicly changing numbers
  */
 
 
