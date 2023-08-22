@@ -28,9 +28,7 @@ module top_DH_basys3 ( //connections order the same as in constraints file
     input wire JA3, //photodetector
 
     output logic [5:0] JB,
-    input logic [3:0] JC,
-    input logic JC9,
-    input logic JC10
+    input logic [5:0] JC
 
 );
 
@@ -79,9 +77,9 @@ module top_DH_basys3 ( //connections order the same as in constraints file
     .player1_pause(JB[4]),
     .player1_reload(JB[5]),
     .player1_score(JB[3:0]),
-    .player2_pause_raw(JC10),
-    .player2_reload_raw(JC9),
-    .player2_score_raw({JC[0], JC[1], JC[2], JC[3]})
+    .player2_pause_raw(JC[4]),
+    .player2_reload_raw(JC[5]),
+    .player2_score_raw(JC[3:0])
  );
 
 

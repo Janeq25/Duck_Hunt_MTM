@@ -34,7 +34,7 @@ localparam SCREEN_HEIGHT = 768;
 localparam HELP_X = 0;
 localparam HELP_Y = 0;
 localparam HELP_SIZE_X = 20;
-localparam HELP_SIZE_Y = 25;
+localparam HELP_SIZE_Y = 29;
 localparam HELP_DATA = {" Aim for the ducks  ",
                         " using mouse or gun.",
                         "                    ",
@@ -48,18 +48,22 @@ localparam HELP_DATA = {" Aim for the ducks  ",
                         "                    ",
                         " Good Luck!         ",
                         "                    ",
+                        "                    ",
+                        "                    ",
+                        "                    ",
+                        "                    ",
                         " wiring diagram:    ",
                         " gun connection:    ",
                         " br bl wb wg x  x JA",
                         " x  x  x  x  x  x   ",
                         "                    ",
-                        " player2 conn:      ",
-                        " br bl wb wg x  x JC",
-                        " wh bl or x  x  x   ",
+                        " JC and JB connect: ",
+                        " x  x  bl bl bl bl  ",
+                        " x  x  x  x  bl bl  ",
                         "                    ",
-                        " player2 conn2:     ",
-                        " rd gr bl pu x  x JB",
-                        " wh bl or x  mg  x  "};
+                        " basys1      basys2 ",
+                        " JB(bl)  ->  JC(yl) ",
+                        " JC(yl)  <-  JB(bl) "};
 localparam HELP_COLOR = 12'hf_f_f;
 
 localparam PAUSE_X = SCREEN_WIDTH/2;
