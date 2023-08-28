@@ -196,6 +196,9 @@ always_comb begin : state_comb_blk
                 state_nxt = DUCK_HIT;
             end 
         end
+        default: begin
+            state_nxt = IDLE;
+        end
     endcase
 end
 
@@ -307,6 +310,15 @@ always_comb begin : out_comb_blk
             duck_show = '1;
             duck_hit = '1;
             direction_nxt = direction;
+        end
+        default: begin
+            duck_x_nxt = '0; 
+            duck_y_nxt = '0; 
+            duck_vertical_speed_nxt = duck_vertical_speed;
+
+            duck_show = '0;
+            duck_hit = '0;
+            direction_nxt = '1;
         end
     endcase
 end
