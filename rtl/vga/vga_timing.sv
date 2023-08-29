@@ -15,7 +15,7 @@ module vga_timing (
     input  logic clk,
     input  logic rst,
 
-    itf_vga.out out,
+    itf_vga_no_rgb.out out,
 
     output logic new_frame
 );

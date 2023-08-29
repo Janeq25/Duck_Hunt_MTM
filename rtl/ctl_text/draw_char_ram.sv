@@ -19,7 +19,6 @@ module draw_char_ram #(
     input logic clk,
 
     input logic [10:0] hcount,
-    input logic [10:0] vcount,
 
     input logic [10:0] delayed_hcount,
     input logic [10:0] delayed_vcount,
@@ -32,7 +31,7 @@ module draw_char_ram #(
     output logic [3:0] char_line,
     output logic [6:0] char_code,
 
-    input logic [SIZE_X-1:0][7:0] chars
+    input logic [SIZE_X-1:0][6:0] chars
 
 );
 
@@ -42,6 +41,7 @@ module draw_char_ram #(
 logic [3:0] char_line_nxt;
 logic [11:0] rgb_nxt;
 logic [2:0] char_pixel;
+logic [6:0] char_code_nxt;
 
 
 
@@ -50,14 +50,16 @@ always_ff @(posedge clk)  begin : output_register
     if (rst) begin
         char_line <= '0;
         rgb_out <= '0;
+        char_code <= '0;
     end
     else begin
         char_line <= char_line_nxt;
         rgb_out <= rgb_nxt;
+        char_code <= char_code_nxt;
     end
 end
 
-assign char_code = chars[((hcount - RECT_X)>>3)][6:0];
+assign char_code_nxt = chars[((hcount - RECT_X)>>3)][6:0];
 
 assign char_line_nxt = 4'(delayed_vcount - RECT_Y);
 assign char_pixel = 3'(delayed_hcount - RECT_X);

@@ -12,7 +12,7 @@
     input logic clk100MHz, //mouse clock 100MHz
     input logic rst,
 
-    input logic reload_btn,
+    input logic reload_btn_raw,
 
     output logic vs,
     output logic hs,
@@ -47,7 +47,7 @@
 localparam H_SPEED = 10;
 
  // interfaces
-   itf_vga timing_to_draw_bg();
+   itf_vga_no_rgb timing_to_draw_bg();
    itf_vga draw_bg_to_draw_duck();
    itf_vga draw_duck_to_draw_crosshair();
    itf_vga draw_crosshair_to_draw_target();
@@ -116,6 +116,14 @@ localparam H_SPEED = 10;
  // --- input section ---
 
  // --- multiplayer debounce ---
+
+ debounce u_reload (
+  .clk,
+  .reset(rst),
+  .sw(reload_btn_raw),
+  .db_level(reload_btn),
+  .db_tick()
+ );
 
  debounce u_player2_pause (
   .clk,

@@ -15,7 +15,7 @@ module draw_bg (
     input  logic clk,
     input  logic rst,
 
-    itf_vga.in in,
+    itf_vga_no_rgb.in in,
 
     itf_vga.out out
 );

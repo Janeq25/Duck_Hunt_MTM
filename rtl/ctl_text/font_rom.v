@@ -6,9 +6,12 @@
 //  - ROM size: 512-by-8 (2^11-by-8) bits
 //              16K bits: 1 BRAM
 
+// modification by Jan Cichon, added synchronous reset
+
 module font_rom
     (
         input  wire        clk,
+        input  wire       rst,
         input  wire [10:0] addr,            // {char_code[6:0], char_line[3:0]}
         output reg  [7:0]  char_pixels // pixels of the character line
     );
@@ -17,8 +20,14 @@ module font_rom
     reg [7:0] data;
 
     // body
-    always @(posedge clk)
-        char_pixels <= data;
+    always @(posedge clk) begin
+        if (rst) begin
+            char_pixels <= 8'b00000000;
+        end
+        else begin
+            char_pixels <= data;
+        end
+    end
 
     always @*
         case (addr)

@@ -39,8 +39,10 @@ module draw_char_rect #(
 
 //internal signls
 
-logic [$clog2(SIZE_X)-1:0] char_x;
-logic [$clog2(SIZE_Y)-1:0] char_y;
+logic [$clog2(SIZE_X+1)-1:0] char_x;
+logic [$clog2(SIZE_Y+1)-1:0] char_y;
+logic [$clog2(SIZE_X+1)-1:0] char_x_nxt;
+logic [$clog2(SIZE_Y+1)-1:0] char_y_nxt;
 logic [3:0] char_line_nxt;
 logic [11:0] rgb_nxt;
 logic [2:0] char_pixel;
@@ -68,15 +70,19 @@ always_ff @(posedge clk)  begin : output_register
     if (rst) begin
         char_line <= '0;
         rgb_out <= '0;
+        char_x <= '0;
+        char_y <= '0;
     end
     else begin
         char_line <= char_line_nxt;
         rgb_out <= rgb_nxt;
+        char_x <= char_x_nxt;
+        char_y <= char_y_nxt;
     end
 end
 
-assign char_x = (hcount - RECT_X)>>3;
-assign char_y = (vcount - RECT_Y)>>4;
+assign char_x_nxt = (hcount - RECT_X)>>3;
+assign char_y_nxt = (vcount - RECT_Y)>>4;
 
 assign char_line_nxt = 4'(delayed_vcount - RECT_Y);
 assign char_pixel = 3'(delayed_hcount - RECT_X);

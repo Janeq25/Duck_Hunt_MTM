@@ -214,12 +214,13 @@ itf_vga delayed();
 //font memory
 font_rom u_font_rom (
     .clk,
+    .rst,
     .addr,
     .char_pixels
 );
 
 //signal sync
-delay #(.CLK_DEL(2), .WIDTH(38)) u_delay (
+delay #(.CLK_DEL(3), .WIDTH(38)) u_delay (
     .clk(clk),
     .rst(rst),
     .din({in.hcount, in.hblnk, in.hsync, in.vcount, in.vblnk, in.vsync, in.rgb}),
@@ -423,10 +424,9 @@ draw_char_ram #(
     .char_pixels,
     .char_code(char_code_player1_score_number),
 
-    .chars({8'(8'h30 + score_p1%10), 8'(8'h30 + score_p1/10), " "}),
+    .chars({7'(7'h30 + score_p1%10), 7'(7'h30 + score_p1/10), 7'b0}),
 
     .hcount(in.hcount),
-    .vcount(in.vcount),
     .delayed_hcount(delayed.hcount),
     .delayed_vcount(delayed.vcount),
     .rgb_in('0),
@@ -474,10 +474,9 @@ draw_char_ram #(
     .char_pixels,
     .char_code(char_code_player2_score_number),
 
-    .chars({8'(8'h30 + score_p2%10), 8'(8'h30 + score_p2/10), " "}),
+    .chars({7'(7'h30 + score_p2%10), 7'(7'h30 + score_p2/10), 7'b0}),
 
     .hcount(in.hcount),
-    .vcount(in.vcount),
     .delayed_hcount(delayed.hcount),
     .delayed_vcount(delayed.vcount),
     .rgb_in('0),

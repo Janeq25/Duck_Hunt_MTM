@@ -53,7 +53,7 @@ module top_DH_basys3 ( //connections order the same as in constraints file
     .clk100MHz(clk100MHz),
     .rst(btnU),
 
-    .reload_btn(btnC),
+    .reload_btn_raw(btnC),
 
     .r(vgaRed),
     .g(vgaGreen),

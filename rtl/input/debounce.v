@@ -22,7 +22,7 @@ module debounce
 
    // body
    // fsmd state & data registers
-    always @(posedge clk, posedge reset)
+    always @(posedge clk)
        if (reset)
           begin
              state_reg <= zero;
