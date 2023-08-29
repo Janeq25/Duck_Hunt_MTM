@@ -20,7 +20,7 @@ module vga_timing (
     output logic new_frame
 );
 
-import vga_pkg::*;
+import DH_pkg::*;
 
 
 /**

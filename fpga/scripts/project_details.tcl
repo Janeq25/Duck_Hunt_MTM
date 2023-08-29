@@ -34,12 +34,12 @@ set xdc_files {
 # Specify SystemVerilog design files location   -- EDIT
 set sv_files {
     rtl/top_DH_basys3.sv
+    ../rtl/config/DH_pkg.sv
     ../rtl/top_DH.sv
     ../rtl/vga/itf_vga.sv
     ../rtl/vga/itf_vga_no_rgb.sv
     ../rtl/vga/vga_timing.sv
     ../rtl/vga/draw_bg.sv
-    ../rtl/vga/vga_pkg.sv
     ../rtl/vga/template_rom.sv
     ../rtl/vga/draw_duck.sv
     ../rtl/vga/draw_crosshair.sv

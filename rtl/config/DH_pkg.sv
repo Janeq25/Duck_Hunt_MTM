@@ -10,13 +10,11 @@
  * Package with vga related constants.
  */
 
-package vga_pkg;
+package DH_pkg;
 
 // Parameters for VGA Display 1024 x 768 @ 60fps using a 65 MHz clock;
 localparam HOR_PIXELS = 1024;
 localparam VER_PIXELS = 768;
-
-// Add VGA timing parameters here and refer to them in other modules.
 
 localparam H_TOTAL = 1344;
 localparam V_TOTAL = 806 + 1;
@@ -31,7 +29,14 @@ localparam V_S_START = V_B_START + 3;
 localparam V_S_END = V_S_START + 6;
 localparam V_B_END = V_B_START + 38;
 
+
+// Parameters for game assets
+localparam DUCK_HEIGHT = 48;
+localparam DUCK_WIDTH = 64;
+
 // Parameters for game settings
 localparam AMMO_QUANTITY = 15;
+localparam H_SPEED = 10;
+
 
 endpackage

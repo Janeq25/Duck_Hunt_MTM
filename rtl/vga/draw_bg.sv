@@ -20,7 +20,7 @@ module draw_bg (
     itf_vga.out out
 );
 
-import vga_pkg::*;
+import DH_pkg::*;
 
 
 /**

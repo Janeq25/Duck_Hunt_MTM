@@ -21,7 +21,7 @@
     output logic [3:0] ammo_ctr
  );
 
- import vga_pkg::*;
+ import DH_pkg::*;
 
 // internal signals
 logic shot_last, no_ammo_nxt;

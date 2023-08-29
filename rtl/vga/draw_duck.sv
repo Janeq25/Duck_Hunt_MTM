@@ -24,10 +24,7 @@
     itf_vga.out out
  );
 
- // local params
-    localparam DUCK_HEIGHT = 48;
-    localparam DUCK_WIDTH = 64;
-
+ import DH_pkg::*;
 
  // internal signals
     logic [11:0] rom_duckA;

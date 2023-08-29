@@ -23,13 +23,10 @@ module draw_overlay(
 
 );
 
+import DH_pkg::*;
 
 
 //params
-localparam DUCK_HEIGHT = 48;
-localparam DUCK_WIDTH = 64;
-localparam SCREEN_WIDTH = 1024;
-localparam SCREEN_HEIGHT = 768;
 
 localparam HELP_X = 0;
 localparam HELP_Y = 0;
@@ -66,21 +63,21 @@ localparam HELP_DATA = {" Aim for the ducks  ",
                         " JC(yl)  <-  JB(bl) "};
 localparam HELP_COLOR = 12'hf_f_f;
 
-localparam PAUSE_X = SCREEN_WIDTH/2;
+localparam PAUSE_X = HOR_PIXELS/2;
 localparam PAUSE_Y = 100;
 localparam PAUSE_SIZE_X = 8;
 localparam PAUSE_SIZE_Y = 1;
 localparam PAUSE_DATA = " PAUSED ";
 localparam PAUSE_COLOR = 12'h7_7_7;
 
-localparam WINNER_X = SCREEN_WIDTH/2;
+localparam WINNER_X = HOR_PIXELS/2;
 localparam WINNER_Y = 130;
 localparam WINNER_SIZE_X = 9;
 localparam WINNER_SIZE_Y = 1;
 localparam WINNER_DATA = " WINNER! ";
 localparam WINNER_COLOR = 12'h0_f_0;
 
-localparam LOOSER_X = (SCREEN_WIDTH/2) - 20;
+localparam LOOSER_X = (HOR_PIXELS/2) - 20;
 localparam LOOSER_Y = 130;
 localparam LOOSER_SIZE_X = 14;
 localparam LOOSER_SIZE_Y = 1;
@@ -591,7 +588,7 @@ end
 //govern font_rom access and display text according to incoming signals
 always_comb begin
     if (pause) begin
-        if (delayed.hcount > SCREEN_WIDTH/2 && delayed.vcount > SCREEN_HEIGHT/2 && delayed.hcount < (SCREEN_WIDTH/2)+DUCK_WIDTH && delayed.vcount < (SCREEN_HEIGHT/2)+DUCK_HEIGHT) begin
+        if (delayed.hcount > HOR_PIXELS/2 && delayed.vcount > VER_PIXELS/2 && delayed.hcount < (HOR_PIXELS/2)+DUCK_WIDTH && delayed.vcount < (VER_PIXELS/2)+DUCK_HEIGHT) begin
             rgb_nxt = 12'hf_f_f;
             addr = '0;
         end

@@ -7,7 +7,7 @@
  * outputs signal if mouse aims at rectangle on screen
  */
 
- module mouse_hit_detector #(parameter TARGET_WIDTH, TARGET_HEIGHT)(
+ module mouse_hit_detector #(parameter TARGET_WIDTH = 10, TARGET_HEIGHT = 10)(
     input logic clk,
     input logic rst,
 

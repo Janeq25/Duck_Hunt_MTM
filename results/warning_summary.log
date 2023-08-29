@@ -1,10 +1,8 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-08-29 14:43:18
+Created: 2023-08-29 15:09:48
 
 ----SYNTHESIS----
-WARNING: [Synth 8-9661] initial value of parameter 'TARGET_WIDTH' is omitted [rtl/input/mouse_hit_detector.sv:10]
-WARNING: [Synth 8-9661] initial value of parameter 'TARGET_HEIGHT' is omitted [rtl/input/mouse_hit_detector.sv:10]
 WARNING: [Synth 8-7129] Port char_x[3] in module char_rect__parameterized0 is either unconnected or has no load
 WARNING: [Synth 8-7129] Port char_y[0] in module char_rect__parameterized0 is either unconnected or has no load
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met

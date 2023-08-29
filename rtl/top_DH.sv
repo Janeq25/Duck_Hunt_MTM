@@ -41,9 +41,8 @@
 
  );
 
-
-
-localparam H_SPEED = 10;
+ //packages
+ import DH_pkg::*;
 
  // interfaces
    itf_vga_no_rgb timing_to_draw_bg();
@@ -201,7 +200,7 @@ localparam H_SPEED = 10;
     .db_tick(mouse_left)
   );
 
-  mouse_hit_detector #(.TARGET_HEIGHT(48), .TARGET_WIDTH(64)) u_mouse_hit_detector(
+  mouse_hit_detector #(.TARGET_HEIGHT(DUCK_HEIGHT), .TARGET_WIDTH(DUCK_WIDTH)) u_mouse_hit_detector(
     .clk,
     .rst,
 
