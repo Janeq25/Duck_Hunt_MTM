@@ -11,7 +11,7 @@
 
 module vga_timing_tb;
 
-import vga_pkg::*;
+import DH_pkg::*;
 
 
 /**
@@ -29,7 +29,7 @@ logic clk, clk_100MHz;
 logic rst;
 logic new_frame;
 
-itf_vga i ();
+itf_vga_no_rgb i ();
 
 
 /**

@@ -11,7 +11,7 @@
 
 module vga_draw_duck_tb;
 
-import vga_pkg::*;
+import DH_pkg::*;
 
 
 /**
@@ -29,8 +29,9 @@ logic clk;
 logic rst;
 logic new_frame;
 
-itf_vga timing ();
+itf_vga_no_rgb timing ();
 itf_vga duck ();
+itf_vga bg ();
 
 
 /**
@@ -39,7 +40,6 @@ itf_vga duck ();
 
 initial begin
     clk = 1'b0;
-    timing.rgb = 12'ha_a_a;
     forever #(CLK_PERIOD/2) clk = ~clk;
 end
 
@@ -68,6 +68,13 @@ vga_timing u_vga_timing(
     .new_frame(new_frame)
 );
 
+draw_bg u_draw_bg (
+    .clk,
+    .rst,
+    .in(timing.in),
+    .out(bg.out)
+);
+
 draw_duck dut (
     .clk,
     .rst,
@@ -77,7 +84,7 @@ draw_duck dut (
     .duck_x(11'd800),
     .duck_y(11'd600),
 
-    .in(timing.in),
+    .in(bg.in),
     .new_frame,
     .out(duck.out)
 );

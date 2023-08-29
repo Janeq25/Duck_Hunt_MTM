@@ -195,12 +195,23 @@ logic [10:0] addr;
 logic [7:0] char_pixels;
 
 logic looser;
-always_comb begin
-    if (player2_connected) begin
-        looser = (score_p1 < score_p2);
+logic looser_nxt;
+
+always_ff @(posedge clk) begin
+    if (rst) begin
+        looser <= '0;
     end
     else begin
-        looser = (score_p1 < 15);
+        looser <= looser_nxt;
+    end
+end
+
+always_comb begin
+    if (player2_connected) begin
+        looser_nxt = (score_p1 < score_p2);
+    end
+    else begin
+        looser_nxt = (score_p1 < 15);
     end
 end
 

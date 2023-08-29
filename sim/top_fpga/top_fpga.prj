@@ -9,24 +9,31 @@
 # https://docs.xilinx.com/r/en-US/ug900-vivado-logic-simulation/Project-File-.prj-Syntax
 
 
-sv work ../../rtl/vga_pkg.sv \
-        ../../rtl/vga_timing.sv \
-        ../../rtl/draw_bg.sv \
-        ../../rtl/top_vga.sv \
-        ../../rtl/vga_if.sv \
-        ../../rtl/draw_rect.sv \
-        ../../rtl/clk_wiz_0_clk_wiz.v \
-        ../../rtl/clk_wiz_0.v \
-        ../../rtl/draw_mouse.sv \
-        ../../rtl/mouse_sync.sv \
-        ../../rtl/image_rom.sv \
-        ../../rtl/draw_rect_ctl.sv \
-        ../../rtl/delay.v \
-        ../../rtl/font_rom.v \
-        ../../rtl/char_16x16.sv \
-        ../../rtl/draw_rect_char.sv \
-        ../../fpga/rtl/top_vga_basys3.sv \
-        ../common/tiff_writer.sv \
+sv work ../../fpga/rtl/top_DH_basys3.sv \
+    ../../rtl/config/DH_pkg.sv \
+    ../../rtl/top_DH.sv \
+    ../../rtl/vga/itf_vga.sv \
+    ../../rtl/vga/itf_vga_no_rgb.sv \
+    ../../rtl/vga/vga_timing.sv \
+    ../../rtl/vga/draw_bg.sv \
+    ../../rtl/vga/template_rom.sv \
+    ../../rtl/vga/draw_duck.sv \
+    ../../rtl/vga/draw_crosshair.sv \
+    ../../rtl/vga/draw_target.sv \
+    ../../rtl/vga/draw_overlay.sv \
+    ../../rtl/ctl_text/char_rect.sv \
+    ../../rtl/ctl_text/draw_char_rect.sv \
+    ../../rtl/ctl_text/draw_char_ram.sv \
+    ../../rtl/rng/flip_flop.sv \
+    ../../rtl/rng/random_number_generator.sv \
+    ../../rtl/ctl/ctl_duck.sv \
+    ../../rtl/ctl/ctl_score.sv \
+    ../../rtl/ctl/ctl_ammo.sv \
+    ../../rtl/ctl/ctl_reload.sv \
+    ../../rtl/ctl/ctl_pause.sv \
+    ../../rtl/input/ctl_trigger.sv \
+    ../../rtl/input/gun_conn_detector.sv \
+    ../../rtl/input/mouse_hit_detector.sv \
         top_fpga_tb.sv
 
 

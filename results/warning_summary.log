@@ -1,6 +1,6 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2023-08-29 15:09:48
+Created: 2023-08-29 15:51:07
 
 ----SYNTHESIS----
 WARNING: [Synth 8-7129] Port char_x[3] in module char_rect__parameterized0 is either unconnected or has no load

@@ -11,7 +11,7 @@
 
 module mouse_hit_detector_tb;
 
-import vga_pkg::*;
+import DH_pkg::*;
 
 
 /**
@@ -32,7 +32,7 @@ logic new_frame;
 logic dut_out;
 logic [19:0] dut_in;
 
-itf_vga timing ();
+itf_vga_no_rgb timing ();
 itf_vga duck ();
 
 
@@ -43,7 +43,6 @@ itf_vga duck ();
 initial begin
     clk = 1'b0;
     dut_in = '0;
-    timing.rgb = 12'ha_a_a;
     forever #(CLK_PERIOD/2) clk = ~clk;
 end
 
@@ -73,7 +72,7 @@ vga_timing u_vga_timing(
     .new_frame(new_frame)
 );
 
-mouse_hit_detector #( .TARGET_HEIGHT(48), .TARGET_WIDTH(64)) u_dut(
+mouse_hit_detector #( .TARGET_HEIGHT(DUCK_HEIGHT), .TARGET_WIDTH(DUCK_WIDTH)) u_dut(
     .clk,
     .rst,
 

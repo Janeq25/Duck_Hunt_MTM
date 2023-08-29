@@ -39,7 +39,7 @@ localparam CLK_PERIOD_100MHz = 10; // 100 MHz
  * Local variables and signals
  */
 
-logic clk, clk_100MHz, rst;
+logic clk, rst;
 wire vs, hs;
 wire [3:0] r, g, b;
 
@@ -53,10 +53,6 @@ initial begin
     forever #(CLK_PERIOD/2) clk = ~clk;
 end
 
-initial begin
-    clk_100MHz = 1'b0;
-    forever #(CLK_PERIOD_100MHz/2) clk_100MHz = ~clk_100MHz;
-end
 
 /**
  * Submodules instances
@@ -64,7 +60,6 @@ end
 
 top_DH dut (
     .clk(clk),
-    .clk100MHz(clk_100MHz),
     .rst(rst),
     .vs(vs),
     .hs(hs),
