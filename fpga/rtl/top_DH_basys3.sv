@@ -33,24 +33,20 @@ module top_DH_basys3 ( //connections order the same as in constraints file
 );
 
  // signals
- logic clk100MHz;
  logic clk65MHz;
 
  // modules
  
  clk_wiz_0 u_clk_wiz_0(
-     .clk100MHz,
-     .clk65MHz,
-     // Status and control signals
-    .locked(),
-    // Clock in ports
-    .clk
+    .clk,
+    .clk65MHz,
+    .reset(btnU),
+    .locked()
     );
 
 
  top_DH u_top_DH(
     .clk(clk65MHz),
-    .clk100MHz(clk100MHz),
     .rst(btnU),
 
     .reload_btn_raw(btnC),

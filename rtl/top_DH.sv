@@ -9,7 +9,6 @@
 
  module top_DH(
     input logic clk, //main clock 65MHz
-    input logic clk100MHz, //mouse clock 100MHz
     input logic rst,
 
     input logic reload_btn_raw,
